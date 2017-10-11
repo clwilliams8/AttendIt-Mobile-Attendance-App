@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "66267338993",
+    "firebase_url": "https://attenditdraft3.firebaseio.com",
+    "project_id": "attenditdraft3",
+    "storage_bucket": "attenditdraft3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66267338993:android:442eb02ca7cc38db",
+        "android_client_info": {
+          "package_name": "com.example.colto.attenditdraft3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66267338993-oo45i3jss1in8ee766q6b00q9uided4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWDK1n2AIsIBHE0GWyvwSXantg_1sMA24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
