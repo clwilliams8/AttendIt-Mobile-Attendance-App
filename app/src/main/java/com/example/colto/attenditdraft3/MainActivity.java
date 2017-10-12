@@ -1,5 +1,6 @@
 package com.example.colto.attenditdraft3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //firebase stuff
-import com.example.colto.attenditdraft3.Model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import com.example.colto.attenditdraft3.Model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editUsername, editPassword, editEmail;
     CheckBox instructorCheckbox;
-    Button registerButton;
+    Button registerButton, signinButton, logOnButton, createAccountButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +42,25 @@ public class MainActivity extends AppCompatActivity {
         editPassword = (EditText) findViewById(R.id.editPassword);
         editEmail = (EditText) findViewById(R.id.editEmail);
         instructorCheckbox = (CheckBox) findViewById(R.id.instructorCheckbox);
+
         registerButton = (Button) findViewById(R.id.registerButton);
+        signinButton = (Button) findViewById(R.id.signinButton);
+
+        signinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signIn = new Intent(getApplicationContext(), SigninActivity.class);
+                startActivity(signIn);
+            }
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final User user = new User(editUsername.getText().toString(),
                         editPassword.getText().toString(),
-                        editEmail.getText().toString());
+                        editEmail.getText().toString(),
+                        instructorCheckbox.isChecked());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
