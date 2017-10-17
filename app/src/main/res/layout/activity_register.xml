@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.colto.attenditdraft3.MainActivity">
+    android:background="#EBFD"
+    tools:context="com.example.colto.attenditdraft3.RegisterActivity">
 
     <TextView
         android:id="@+id/SignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="423dp"
+        android:layout_marginBottom="515dp"
+        android:fontFamily="casual"
         android:text="Register"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -100,7 +103,8 @@
         app:layout_constraintTop_toBottomOf="@+id/instructorCheckbox"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="32dp"
+        app:layout_constraintVertical_bias="0.505" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -10,17 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //firebase stuff
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.colto.attenditdraft3.Model.User;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     //Firebase
     FirebaseDatabase database;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
         //Firebase
         database = FirebaseDatabase.getInstance();
@@ -66,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.child(user.getUsername()).exists())
-                            Toast.makeText(MainActivity.this, "The Username Already Exsist!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "The Username Already Exsist!", Toast.LENGTH_SHORT).show();
                         else {
                             users.child(user.getUsername()).setValue(user);
-                            Toast.makeText(MainActivity.this, "Successfully Registered!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Successfully Registered!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
