@@ -3,40 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:id="@+id/myDrawer"
     android:background="#EBFD"
-    tools:context="com.example.colto.attenditdraft3.InstructorActivity">
+    tools:context="com.example.colto.attenditdraft3.InstructorActivity"
+    tools:openDrawer="start">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Swipe Left for Navigation"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="243dp" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 
 <android.support.design.widget.NavigationView
+    android:id="@+id/nav_view"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="#3F51B5"
-    app:itemTextColor="#FFF"
-    app:itemIconTint="#FFF"
+    android:fitsSystemWindows="true"
     app:headerLayout="@layout/my_header"
     app:menu="@menu/my_menu"
-    >
+    />
 
-
-</android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
