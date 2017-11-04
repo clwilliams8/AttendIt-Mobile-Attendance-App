@@ -20,11 +20,11 @@ import com.example.colto.attenditdraft3.Model.User;
 public class SigninActivity extends AppCompatActivity {
 
     //Firebase
-    FirebaseDatabase database;
-    DatabaseReference users;
+        FirebaseDatabase database;
+        DatabaseReference users;
 
-    EditText editUsername, editPassword;
-    Button logOnButton, createAccountButton;
+        EditText editUsername, editPassword;
+        Button logOnButton, createAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
