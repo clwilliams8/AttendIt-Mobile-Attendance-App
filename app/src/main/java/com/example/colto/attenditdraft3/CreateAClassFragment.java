@@ -23,6 +23,7 @@ public class CreateAClassFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference classes;
+    DatabaseReference teacherUser;
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
     EditText classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
@@ -38,8 +39,14 @@ public class CreateAClassFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_aclass, container, false);
 
+        //getTeacherUsername from Instructor Activity
+        final String teacherUsername = getArguments().getString("teacherUsername");
+        TextView textView6 = (TextView) view.findViewById(R.id.textView6);
+        textView6.setText(teacherUsername);
+
         //Firebase
         database = FirebaseDatabase.getInstance();
+        teacherUser = database.getReference("User");
         classes = database.getReference("Class");
 
         classNameInput = (EditText) view.findViewById(R.id.classNameInput);
@@ -56,14 +63,25 @@ public class CreateAClassFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo
-                Toast.makeText(getContext(), "Class created", Toast.LENGTH_SHORT).show();
+                createClass(teacherUsername,
+                        classNameInput.getText().toString(),
+                        startDateInput.getText().toString(),
+                        endDateInput.getText().toString(),
+                        startTimeInput.getText().toString(),
+                        endTimeInput.getText().toString(),
+                        studentLateInput.getText().toString(),
+                        absentTimeInput.getText().toString(),
+                        daysOfWeekInput.getText().toString());
             }
         });
 
-
         return view;
+    }
+
+        private void createClass(final String teacherUserName, String classNameInput, final String startDateInput, final String endDateInput, final String startTimeInput,
+                                 final String endTimeInput, final String studentLateInput, final String absentTimeInput, final String daysOfWeekInput) {
+
+        }
 
 
     }
-
-}

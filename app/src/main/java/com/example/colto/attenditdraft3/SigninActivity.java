@@ -67,6 +67,7 @@ public class SigninActivity extends AppCompatActivity {
                         if (login.getPassword().equals(password) && login.getTeacher().equals(true)) {
                             Toast.makeText(SigninActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
                             Intent home = new Intent(getApplicationContext(), InstructorActivity.class);
+                            home.putExtra("teacherUsername",username);
                             startActivity(home);
                         }
                         if (login.getPassword().equals(password) && login.getTeacher().equals(false)) {
