@@ -16,30 +16,14 @@ import android.widget.TextView;
 public class InstructorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = InstructorActivity.class.getSimpleName();
-
     NavigationView navigationView = null;
     Toolbar toolbar = null;
-
-    //teacher username that was passed from SignIn activity
-    //teacherUsername needs to be passed to Create A Class fragment to save the teacher's username
-    //to each class he creates
-    Bundle bundle = null;
-    String teacherUsername;
-    TextView textView;
-    //Intent home;
-    //String teacherUserName;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor);
 
-        bundle = this.getIntent().getExtras();
-        teacherUsername = bundle.getString("teacherUsername");
-        textView.setText(teacherUsername);
-        Log.d(TAG, "Instructor name is" + teacherUsername);
         //Set the fragment init
         MyClassesFragment fragment = new MyClassesFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -107,7 +91,6 @@ public class InstructorActivity extends AppCompatActivity
             fragmentTransaction.commit();
         } else if (id == R.id.CreateAClass) {
             CreateAClassFragment fragment = new CreateAClassFragment();
-           // fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);

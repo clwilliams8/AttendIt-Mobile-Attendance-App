@@ -26,7 +26,7 @@ public class CreateAClassFragment extends Fragment {
     DatabaseReference teacherUser;
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
-    EditText classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
+    EditText yourUserNameInput,classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
     Button createClassButton;
 
     public CreateAClassFragment() {
@@ -39,16 +39,12 @@ public class CreateAClassFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_aclass, container, false);
 
-        //getTeacherUsername from Instructor Activity
-        final String teacherUsername = getArguments().getString("teacherUsername");
-        TextView textView6 = (TextView) view.findViewById(R.id.textView6);
-        textView6.setText(teacherUsername);
-
         //Firebase
         database = FirebaseDatabase.getInstance();
         teacherUser = database.getReference("User");
         classes = database.getReference("Class");
 
+        yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
         classNameInput = (EditText) view.findViewById(R.id.classNameInput);
         startDateInput = (EditText) view.findViewById(R.id.startDateInput);
         endDateInput = (EditText) view.findViewById(R.id.endDateInput);
@@ -63,7 +59,7 @@ public class CreateAClassFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo
-                createClass(teacherUsername,
+                createClass(yourUserNameInput.getText().toString(),
                         classNameInput.getText().toString(),
                         startDateInput.getText().toString(),
                         endDateInput.getText().toString(),

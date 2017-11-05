@@ -25,7 +25,6 @@ public class SigninActivity extends AppCompatActivity {
 
         EditText editUsername, editPassword;
         Button logOnButton, createAccountButton;
-        String teacherUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class SigninActivity extends AppCompatActivity {
         logOnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                teacherUsername=editUsername.getText().toString();
                 signIn(editUsername.getText().toString(),
                         editPassword.getText().toString());
             }
@@ -69,10 +67,6 @@ public class SigninActivity extends AppCompatActivity {
                         if (login.getPassword().equals(password) && login.getTeacher().equals(true)) {
                             Toast.makeText(SigninActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
                             Intent home = new Intent(getApplicationContext(), InstructorActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("teacherUsername", teacherUsername);
-                            home.putExtras(bundle);
-                            //home.putExtra("teacherUsername",teacherUsername);
                             startActivity(home);
                         }
                         if (login.getPassword().equals(password) && login.getTeacher().equals(false)) {
