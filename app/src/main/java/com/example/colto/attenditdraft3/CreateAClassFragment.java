@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.colto.attenditdraft3.Model.TeacherClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,7 +43,7 @@ public class CreateAClassFragment extends Fragment {
         //Firebase
         database = FirebaseDatabase.getInstance();
         teacherUser = database.getReference("User");
-        classes = database.getReference("Class");
+        classes = database.getReference("TeacherClass");
 
         yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
         classNameInput = (EditText) view.findViewById(R.id.classNameInput);
@@ -59,6 +60,8 @@ public class CreateAClassFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo
+                final TeacherClass teacherClass = new TeacherClass(yourUserNameInput.getText().toString(),
+                        )
                 createClass(yourUserNameInput.getText().toString(),
                         classNameInput.getText().toString(),
                         startDateInput.getText().toString(),
@@ -76,6 +79,7 @@ public class CreateAClassFragment extends Fragment {
 
         private void createClass(final String teacherUserName, String classNameInput, final String startDateInput, final String endDateInput, final String startTimeInput,
                                  final String endTimeInput, final String studentLateInput, final String absentTimeInput, final String daysOfWeekInput) {
+
 
         }
 

@@ -4,8 +4,9 @@ package com.example.colto.attenditdraft3.Model;
  * Created by colto on 11/1/2017.
  */
 
-public class Class {
+public class TeacherClass {
     private String teacherUsername;
+    private String className;
     private String date;
     private String startTime;
     private String endTime;
@@ -15,13 +16,14 @@ public class Class {
     private String location;
     private String studentsEnrolled;
 
-    public Class(){
+    public TeacherClass(){
 
     }
 
-    public Class(String teacherUsername, String date, String startTime , String endTime, String lateTime, String absentTime,
-                 String daysOfTheWeek, String location, String studentsEnrolled) {
+    public TeacherClass(String teacherUsername, String className,String date, String startTime , String endTime, String lateTime, String absentTime,
+                        String daysOfTheWeek, String location, String studentsEnrolled) {
         this.teacherUsername = teacherUsername;
+        this.className = className;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -36,9 +38,11 @@ public class Class {
         return teacherUsername;
     }
 
-    public void setTeacherUsername(String teacherUsername) {
-        this.teacherUsername = teacherUsername;
-    }
+    public void setTeacherUsername(String teacherUsername) {this.teacherUsername = teacherUsername;}
+
+    public String getClassName(){return className;}
+
+    public void setClassName(String className){this.className = className;}
 
     public String getDate() {
         return date;
@@ -100,7 +104,5 @@ public class Class {
         return studentsEnrolled;
     }
 
-    public void setStudentsEnrolled(String studentsEnrolled) {
-        this.studentsEnrolled = studentsEnrolled;
-    }
+    public void setStudentsEnrolled(String studentsEnrolled) {this.studentsEnrolled = studentsEnrolled;}
 }
