@@ -81,7 +81,7 @@ public class StudentActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.MyClasses) {
-            MyClassesFragment fragment = new MyClassesFragment();
+            MyClassesFragmentForStudents fragment = new MyClassesFragmentForStudents();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);

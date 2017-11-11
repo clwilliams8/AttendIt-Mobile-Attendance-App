@@ -9,16 +9,18 @@ public class User {
     private String password;
     private String email;
     private Boolean isTeacher;
+    private String classesJoined;
 
     public User(){
 
     }
 
-    public User(String username, String password, String email, Boolean isTeacher) {
+    public User(String username, String password, String email, Boolean isTeacher, String classesJoined) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.isTeacher = isTeacher;
+        this.classesJoined = classesJoined;
     }
 
     public String getUsername() {return username;}
@@ -46,4 +48,9 @@ public class User {
     public Boolean getTeacher() {return isTeacher;}
 
     public void setTeacher(Boolean teacher) {isTeacher = teacher;}
+
+    public String getClassesJoined() {return classesJoined;}
+
+    public void setClassesJoined(String classesJoined) {this.classesJoined = classesJoined;}
+
 }

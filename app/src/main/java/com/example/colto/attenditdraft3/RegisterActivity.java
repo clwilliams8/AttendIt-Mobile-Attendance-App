@@ -58,13 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
                 final User user = new User(editUsername.getText().toString(),
                         editPassword.getText().toString(),
                         editEmail.getText().toString(),
-                        instructorCheckbox.isChecked());
+                        instructorCheckbox.isChecked(),
+                        "empty");
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.child(user.getUsername()).exists())
-                            Toast.makeText(RegisterActivity.this, "The Username Already Exsist!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "The Username Already Exist!", Toast.LENGTH_SHORT).show();
                         else {
                             users.child(user.getUsername()).setValue(user);
                             Toast.makeText(RegisterActivity.this, "Successfully Registered!", Toast.LENGTH_SHORT).show();

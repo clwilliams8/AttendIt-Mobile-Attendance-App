@@ -90,7 +90,7 @@ public class CreateAClassFragment extends Fragment {
                         else {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             Toast.makeText(getActivity(), "Successfully created class!", Toast.LENGTH_SHORT).show();
-
+                            
                         }
                     }
 
