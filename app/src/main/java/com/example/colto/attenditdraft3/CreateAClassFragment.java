@@ -12,8 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.colto.attenditdraft3.Model.TeacherClass;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -25,6 +29,9 @@ public class CreateAClassFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference classes;
     DatabaseReference teacherUser;
+    DatabaseReference classOwner;
+    //ChildEventListener childEventListener;
+
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
     EditText yourUserNameInput,classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
@@ -42,8 +49,8 @@ public class CreateAClassFragment extends Fragment {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        teacherUser = database.getReference("User");
-        classes = database.getReference("TeacherClass");
+        teacherUser = database.getReference("User"); //need to add class ID to teacher that creates class so it will show up under MyClasses
+        classOwner = database.getReference("TeacherClass");
 
         yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
         classNameInput = (EditText) view.findViewById(R.id.classNameInput);
@@ -60,28 +67,42 @@ public class CreateAClassFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo
-                final TeacherClass teacherClass = new TeacherClass(yourUserNameInput.getText().toString(),
-                        )
-                createClass(yourUserNameInput.getText().toString(),
-                        classNameInput.getText().toString(),
+                final String myClassOwner = yourUserNameInput.getText().toString();
+                final TeacherClass teacherClass = new TeacherClass(classNameInput.getText().toString(),
+                        yourUserNameInput.getText().toString(),
                         startDateInput.getText().toString(),
                         endDateInput.getText().toString(),
                         startTimeInput.getText().toString(),
                         endTimeInput.getText().toString(),
                         studentLateInput.getText().toString(),
                         absentTimeInput.getText().toString(),
-                        daysOfWeekInput.getText().toString());
+                        daysOfWeekInput.getText().toString(),
+                        "location",
+                        "students enrolled");
+
+                classes = classOwner.child(myClassOwner); //need to add the each class they create under their name.
+
+                classes.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child(teacherClass.getClassName()).exists())
+                            Toast.makeText(getActivity(), "Class name already exists.", Toast.LENGTH_SHORT).show();
+                        else {
+                            classes.child(teacherClass.getClassName()).setValue(teacherClass);
+                            Toast.makeText(getActivity(), "Successfully created class!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
         return view;
     }
+}
 
-        private void createClass(final String teacherUserName, String classNameInput, final String startDateInput, final String endDateInput, final String startTimeInput,
-                                 final String endTimeInput, final String studentLateInput, final String absentTimeInput, final String daysOfWeekInput) {
-
-
-        }
-
-
-    }

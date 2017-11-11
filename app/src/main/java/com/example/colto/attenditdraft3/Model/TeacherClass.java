@@ -7,7 +7,8 @@ package com.example.colto.attenditdraft3.Model;
 public class TeacherClass {
     private String teacherUsername;
     private String className;
-    private String date;
+    private String startDate;
+    private String endDate;
     private String startTime;
     private String endTime;
     private String lateTime;
@@ -20,11 +21,12 @@ public class TeacherClass {
 
     }
 
-    public TeacherClass(String teacherUsername, String className,String date, String startTime , String endTime, String lateTime, String absentTime,
+    public TeacherClass(String className,String teacherUsername, String startDate, String endDate, String startTime , String endTime, String lateTime, String absentTime,
                         String daysOfTheWeek, String location, String studentsEnrolled) {
-        this.teacherUsername = teacherUsername;
         this.className = className;
-        this.date = date;
+        this.teacherUsername = teacherUsername;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.lateTime = lateTime;
@@ -44,13 +46,15 @@ public class TeacherClass {
 
     public void setClassName(String className){this.className = className;}
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String date) {
+        this.startDate = date;
     }
+
+    public String getEndDate(String endDate) {return  endDate;}
 
     public String getStartTime() {
         return startTime;
