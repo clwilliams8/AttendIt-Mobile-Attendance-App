@@ -49,7 +49,7 @@ public class CreateAClassFragment extends Fragment {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        teacherUser = database.getReference("User"); //need to add class ID to teacher that creates class so it will show up under MyClasses
+        //teacherUser = database.getReference().getKey(classesJoined); //need to add class ID to teacher that creates class so it will show up under MyClasses
         classOwner = database.getReference("TeacherClass");
 
         yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
@@ -90,7 +90,7 @@ public class CreateAClassFragment extends Fragment {
                         else {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             Toast.makeText(getActivity(), "Successfully created class!", Toast.LENGTH_SHORT).show();
-                            
+
                         }
                     }
 
