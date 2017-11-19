@@ -22,7 +22,7 @@ public class StudentActivity extends AppCompatActivity
         setContentView(R.layout.activity_student);
 
         //Set the fragment init
-        MyClassesFragment fragment = new MyClassesFragment();
+        MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);

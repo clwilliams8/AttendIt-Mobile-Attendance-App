@@ -49,7 +49,6 @@ public class CreateAClassFragment extends Fragment {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        //teacherUser = database.getReference().getKey(classesJoined); //need to add class ID to teacher that creates class so it will show up under MyClasses
         classOwner = database.getReference("TeacherClass");
 
         yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
@@ -81,6 +80,9 @@ public class CreateAClassFragment extends Fragment {
                         "students enrolled");
 
                 classes = classOwner.child(myClassOwner); //need to add the each class they create under their name.
+                teacherUser = database.getReference("Users"); //need to add class ID to teacher that creates class so it will show up under MyClasses
+                teacherUser = teacherUser.child(myClassOwner);
+                teacherUser = teacherUser.child("MyClasses");
 
                 classes.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -89,6 +91,7 @@ public class CreateAClassFragment extends Fragment {
                             Toast.makeText(getActivity(), "Class name already exists.", Toast.LENGTH_SHORT).show();
                         else {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
+                            teacherUser.push().setValue(classNameInput.getText().toString());
                             Toast.makeText(getActivity(), "Successfully created class!", Toast.LENGTH_SHORT).show();
 
                         }

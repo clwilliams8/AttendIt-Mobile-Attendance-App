@@ -1,6 +1,5 @@
 package com.example.colto.attenditdraft3;
 
-import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,10 +7,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class InstructorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,7 +22,7 @@ public class InstructorActivity extends AppCompatActivity
         setContentView(R.layout.activity_instructor);
 
         //Set the fragment init
-        MyClassesFragment fragment = new MyClassesFragment();
+        MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -84,7 +81,7 @@ public class InstructorActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.MyClasses) {
-            MyClassesFragment fragment = new MyClassesFragment();
+            MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
