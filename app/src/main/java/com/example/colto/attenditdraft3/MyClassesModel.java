@@ -22,6 +22,30 @@ public class MyClassesModel {
         this.classDays = classDays;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getClassTimes() {
+        return classTimes;
+    }
+
+    public void setClassTimes(String classTimes) {
+        this.classTimes = classTimes;
+    }
+
+    public String getClassDays() {
+        return classDays;
+    }
+
+    public void setClassDays(String classDays) {
+        this.classDays = classDays;
+    }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("className", className);

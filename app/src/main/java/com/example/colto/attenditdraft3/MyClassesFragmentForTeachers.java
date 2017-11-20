@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.colto.attenditdraft3.Model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -88,10 +89,10 @@ public class MyClassesFragmentForTeachers extends Fragment {
 
         switch (item.getItemId()) {
             case 0:
-                //removeUser(item.getGroupId());
+                removeUser(item.getGroupId());
                 break;
             case 1:
-                //changeUser(item.getGroupId());
+                changeUser(item.getGroupId());
                 break;
         }
 
@@ -167,22 +168,22 @@ public class MyClassesFragmentForTeachers extends Fragment {
         return index;
     }
 
-//    private void removeUser(int position) {
-//        reference.child(result.get(position).key).removeValue(); //todo
-//    }
-//
-//    private void changeUser(int position) {
-//        MyClassesModel myClass = result.get(position);
-//        //in video he changes age to 100
-//
-//        Map<String, Object> userValues = myClass.toMap();
-//        Map<String, Object> newUser = new HashMap<>();
-//
-//        newUser.put(myClass.key, userValues); //todo
-//
-//        reference.updateChildren(newUser);
-//
-//    }
+    private void removeUser(int position) {
+        reference.child(result.get(position).className).removeValue(); //todo
+    }
+
+    private void changeUser(int position) {
+        MyClassesModel myClass = result.get(position);
+        //in video he changes age to 100
+
+        Map<String, Object> userValues = myClass.toMap();
+        Map<String, Object> newUser = new HashMap<>();
+
+        newUser.put(myClass.className, userValues); //todo
+
+        reference.updateChildren(newUser);
+
+    }
 
     private void checkIfEmpty() {
         if(result.size() == 0) {

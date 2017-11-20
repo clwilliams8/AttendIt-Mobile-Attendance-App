@@ -19,6 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +37,8 @@ public class CreateAClassFragment extends Fragment {
     DatabaseReference classOwner;
     String teacherUserNameValue;
     //ChildEventListener childEventListener;
+    private DatabaseReference reference;
+
 
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
@@ -87,9 +94,8 @@ public class CreateAClassFragment extends Fragment {
                         "students enrolled");
 
                 classes = classOwner.child(teacherUserNameValue); //need to add the each class they create under their name.
-                teacherUser = database.getReference("Users"); //need to add class ID to teacher that creates class so it will show up under MyClasses
-                teacherUser = teacherUser.child(teacherUserNameValue);
-                teacherUser = teacherUser.child("MyClasses");
+                teacherUser = database.getReference("Users").child(teacherUserNameValue).child("MyClasses");
+                //need to add class ID to teacher that creates class so it will show up under MyClasses
 
                 classes.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -98,7 +104,10 @@ public class CreateAClassFragment extends Fragment {
                             Toast.makeText(getActivity(), "Class name already exists.", Toast.LENGTH_SHORT).show();
                         else {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
-                            teacherUser.push().setValue(classNameInput.getText().toString());
+                            MyClassesModel myClass = new MyClassesModel(classNameInput.getText().toString(),
+                                    startTimeInput.getText().toString(),
+                                    startDateInput.getText().toString());
+                            teacherUser.child(myClass.getClassName()).setValue((myClass));
                            // teacherUser.child("ClassName").setValue(classNameInput.getText().toString());
                            // teacherUser.child("ClassTimes").setValue(startTimeInput.getText().toString());
                             //teacherUser.child("DaysOfWeek").setValue(daysOfWeekInput.getText().toString());
@@ -118,5 +127,7 @@ public class CreateAClassFragment extends Fragment {
 
         return view;
     }
+
+
 }
 
