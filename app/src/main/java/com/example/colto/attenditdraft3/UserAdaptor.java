@@ -36,14 +36,14 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.UserViewHolder
         holder.itemClassTimes.setText(myClass.classTimes);
         holder.itemClassDaysPerWeek.setText(myClass.classDays);
 
-//        holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-//            @Override
-//            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//                menu.add(holder.getAdapterPosition(), 0, 0, "test?");
-//                menu.add(holder.getAdapterPosition(), 1, 0, "test2?");
-//
-//            }
-//        });
+        holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                menu.add(holder.getAdapterPosition(), 0, 0, "test?");
+                menu.add(holder.getAdapterPosition(), 1, 0, "test2?");
+
+            }
+        });
 
 
     }

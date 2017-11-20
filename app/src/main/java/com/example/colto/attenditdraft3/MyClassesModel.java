@@ -1,5 +1,8 @@
 package com.example.colto.attenditdraft3;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by colto on 11/19/2017.
  */
@@ -18,4 +21,14 @@ public class MyClassesModel {
         this.classTimes = classTimes;
         this.classDays = classDays;
     }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("className", className);
+        result.put("classTimes", classTimes);
+        result.put("classDays", classDays);
+
+        return result;
+    }
+
 }
