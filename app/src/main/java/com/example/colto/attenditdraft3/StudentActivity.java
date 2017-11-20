@@ -22,14 +22,18 @@ public class StudentActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
+        studentNameValue = getIntent().getStringExtra("STUDENT_NAME");
+
         //Set the fragment init
-        MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
+        Bundle bundle = new Bundle();
+        bundle.putString("STUDENT_NAME",studentNameValue);
+        MyClassesFragmentForStudents fragment = new MyClassesFragmentForStudents();
+        fragment.setArguments(bundle);
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
 
-        studentNameValue = getIntent().getStringExtra("STUDENT_NAME");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -23,14 +23,19 @@ public class InstructorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor);
 
+        teacherUserNameValue = getIntent().getStringExtra("TEACHER_NAME");
+
         //Set the fragment init
+
+        //PACKED TEACHER USERNAME INTO A BUNDLE TO PASS TO FRAGMENT
+        Bundle bundle = new Bundle();
+        bundle.putString("TEACHER_NAME",teacherUserNameValue);
         MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
+        fragment.setArguments(bundle);
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
-
-        teacherUserNameValue = getIntent().getStringExtra("TEACHER_NAME");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
