@@ -66,12 +66,18 @@ public class SigninActivity extends AppCompatActivity {
                         User login = dataSnapshot.child(username).getValue(User.class);
                         if (login.getPassword().equals(password) && login.getTeacher().equals(true)) {
                             Toast.makeText(SigninActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
+
+                            String teacherNameValue = editUsername.getText().toString();
                             Intent home = new Intent(getApplicationContext(), InstructorActivity.class);
+                            home.putExtra("TEACHER_NAME", teacherNameValue);
                             startActivity(home);
                         }
                         if (login.getPassword().equals(password) && login.getTeacher().equals(false)) {
                             Toast.makeText(SigninActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
+
+                            String studentNameValue = editUsername.getText().toString();
                             Intent studentHome = new Intent(getApplicationContext(), StudentActivity.class);
+                            studentHome.putExtra("STUDENT_NAME", studentNameValue);
                             startActivity(studentHome);
                         }
                         if (!login.getPassword().equals(password)) {

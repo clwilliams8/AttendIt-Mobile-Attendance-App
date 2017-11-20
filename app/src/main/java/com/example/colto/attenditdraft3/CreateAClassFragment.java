@@ -30,11 +30,12 @@ public class CreateAClassFragment extends Fragment {
     DatabaseReference classes;
     DatabaseReference teacherUser;
     DatabaseReference classOwner;
+    String teacherUserNameValue;
     //ChildEventListener childEventListener;
 
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
-    EditText yourUserNameInput,classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
+    EditText classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
     Button createClassButton;
 
     public CreateAClassFragment() {
@@ -47,11 +48,17 @@ public class CreateAClassFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_aclass, container, false);
 
+        //GET TEACHER USERNAME FROM BUNDLE
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            teacherUserNameValue = bundle.getString("TEACHER_NAME");
+        }
+
+
         //Firebase
         database = FirebaseDatabase.getInstance();
         classOwner = database.getReference("TeacherClass");
 
-        yourUserNameInput = (EditText) view.findViewById(R.id.yourUserNameInput);
         classNameInput = (EditText) view.findViewById(R.id.classNameInput);
         startDateInput = (EditText) view.findViewById(R.id.startDateInput);
         endDateInput = (EditText) view.findViewById(R.id.endDateInput);
@@ -66,9 +73,9 @@ public class CreateAClassFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo
-                final String myClassOwner = yourUserNameInput.getText().toString();
+                //final String myClassOwner = yourUserNameInput.getText().toString();
                 final TeacherClass teacherClass = new TeacherClass(classNameInput.getText().toString(),
-                        yourUserNameInput.getText().toString(),
+                        teacherUserNameValue,
                         startDateInput.getText().toString(),
                         endDateInput.getText().toString(),
                         startTimeInput.getText().toString(),
@@ -79,9 +86,9 @@ public class CreateAClassFragment extends Fragment {
                         "location",
                         "students enrolled");
 
-                classes = classOwner.child(myClassOwner); //need to add the each class they create under their name.
+                classes = classOwner.child(teacherUserNameValue); //need to add the each class they create under their name.
                 teacherUser = database.getReference("Users"); //need to add class ID to teacher that creates class so it will show up under MyClasses
-                teacherUser = teacherUser.child(myClassOwner);
+                teacherUser = teacherUser.child(teacherUserNameValue);
                 teacherUser = teacherUser.child("MyClasses");
 
                 classes.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,6 +99,10 @@ public class CreateAClassFragment extends Fragment {
                         else {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             teacherUser.push().setValue(classNameInput.getText().toString());
+                           // teacherUser.child("ClassName").setValue(classNameInput.getText().toString());
+                           // teacherUser.child("ClassTimes").setValue(startTimeInput.getText().toString());
+                            //teacherUser.child("DaysOfWeek").setValue(daysOfWeekInput.getText().toString());
+
                             Toast.makeText(getActivity(), "Successfully created class!", Toast.LENGTH_SHORT).show();
 
                         }

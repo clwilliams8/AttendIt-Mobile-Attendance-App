@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
  */
 public class MyClassesFragmentForTeachers extends Fragment {
 
+    String teacherUserNameValue;
+
     private RecyclerView recyclerView;
 
 
@@ -35,8 +38,14 @@ public class MyClassesFragmentForTeachers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_aclass, container, false);
-        
+        View view = inflater.inflate(R.layout.fragment_my_classes, container, false);
+
+        Bundle bundle =getArguments();
+        if(bundle != null) {
+            teacherUserNameValue = bundle.getString("TEACHER_NAME");
+        }
+
+
 
         return view;
     }

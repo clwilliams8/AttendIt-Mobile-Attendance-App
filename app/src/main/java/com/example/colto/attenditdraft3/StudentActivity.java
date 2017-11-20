@@ -15,6 +15,7 @@ public class StudentActivity extends AppCompatActivity
 
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+    String studentNameValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class StudentActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+
+        studentNameValue = getIntent().getStringExtra("STUDENT_NAME");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,20 +84,29 @@ public class StudentActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.MyClasses) {
+            Bundle bundle = new Bundle();
+            bundle.putString("STUDENT_NAME",studentNameValue);
             MyClassesFragmentForStudents fragment = new MyClassesFragmentForStudents();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.joinAClass) {
+            Bundle bundle = new Bundle();
+            bundle.putString("STUDENT_NAME",studentNameValue);
             JoinAClassFragment fragment = new JoinAClassFragment();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
 
         } else if (id == R.id.myRecords) {
+            Bundle bundle = new Bundle();
+            bundle.putString("USER_NAME",studentNameValue);
             MyRecordsFragment fragment = new MyRecordsFragment();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);

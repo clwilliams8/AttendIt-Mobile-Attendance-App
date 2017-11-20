@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.colto.attenditdraft3.Model.TeacherClass;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +26,7 @@ public class JoinAClassFragment extends Fragment {
 
     EditText teacherUsernameInput;
     Button searchForClassesButton;
+    String studentUserNameValue;
 
 
     public JoinAClassFragment() {
@@ -36,6 +38,12 @@ public class JoinAClassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_join_aclass, container, false);
+
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            studentUserNameValue = bundle.getString("STUDENT_NAME");
+        }
+
 
         //Local variables
         database = FirebaseDatabase.getInstance();

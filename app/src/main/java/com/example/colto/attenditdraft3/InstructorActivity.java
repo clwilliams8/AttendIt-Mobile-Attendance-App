@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class InstructorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+    String teacherUserNameValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class InstructorActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+
+        teacherUserNameValue = getIntent().getStringExtra("TEACHER_NAME");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,19 +85,30 @@ public class InstructorActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.MyClasses) {
+            //PACKED TEACHER USERNAME INTO A BUNDLE TO PASS TO FRAGMENT
+            Bundle bundle = new Bundle();
+            bundle.putString("TEACHER_NAME",teacherUserNameValue);
             MyClassesFragmentForTeachers fragment = new MyClassesFragmentForTeachers();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.CreateAClass) {
+            //PACKED TEACHER USERNAME INTO A BUNDLE TO PASS TO FRAGMENT
+            Bundle bundle = new Bundle();
+            bundle.putString("TEACHER_NAME",teacherUserNameValue);
             CreateAClassFragment fragment = new CreateAClassFragment();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.myRecords) {
+            Bundle bundle = new Bundle();
+            bundle.putString("USER_NAME",teacherUserNameValue);
             MyRecordsFragment fragment = new MyRecordsFragment();
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
