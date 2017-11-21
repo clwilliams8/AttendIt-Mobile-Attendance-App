@@ -3,6 +3,7 @@ package com.example.colto.attenditdraft3;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -69,9 +70,10 @@ public class MyClassesFragmentForTeachers extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        recyclerView.setLayoutManager(llm);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), llm.getOrientation());
 
-        createResult(); // REMOVE THIS AFTER GETTING UPDATELIST WORKING
+        recyclerView.setLayoutManager(llm);
+        recyclerView.addItemDecoration(itemDecoration);
 
         adaptor = new UserAdaptor(result);
         recyclerView.setAdapter(adaptor);
@@ -99,16 +101,6 @@ public class MyClassesFragmentForTeachers extends Fragment {
         return super.onContextItemSelected(item);
     }
 
-    private void createResult() {
-
-
-        for (int i = 0; i < 10 ; i++) {
-
-            result.add(new MyClassesModel("testname", "testtimes", "testdates"));
-
-        }
-
-    }
 
     private void updateList() {
 
