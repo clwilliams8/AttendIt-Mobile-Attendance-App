@@ -9,17 +9,18 @@ import java.util.Map;
 
 public class MyClassesModel {
 
-    String className, classTimes, classDays;
+    String className, classTimes, classDays, teacherName;
 
     public MyClassesModel(){
 
     }
 
 
-    public MyClassesModel(String className, String classTimes, String classDays) {
+    public MyClassesModel(String className, String classTimes, String classDays, String teacherName) {
         this.className = className;
         this.classTimes = classTimes;
         this.classDays = classDays;
+        this.teacherName = teacherName;
     }
 
     public String getClassName() {
@@ -41,6 +42,10 @@ public class MyClassesModel {
     public String getClassDays() {
         return classDays;
     }
+
+    public String getTeacherName() {return teacherName;}
+
+    public void setTeacherName(String teacherName) {this.teacherName = teacherName;}
 
     public void setClassDays(String classDays) {
         this.classDays = classDays;

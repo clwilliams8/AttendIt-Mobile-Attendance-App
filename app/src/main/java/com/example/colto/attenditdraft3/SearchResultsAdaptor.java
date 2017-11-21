@@ -4,8 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -13,18 +17,20 @@ import java.util.List;
  * Created by colto on 11/19/2017.
  */
 
-public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.UserViewHolder>  {
+public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdaptor.UserViewHolder>  {
 
+    FirebaseDatabase database;
+    DatabaseReference reference;
     private List<MyClassesModel> list;
 
-    public UserAdaptor(List<MyClassesModel> list) {
+    public SearchResultsAdaptor(List<MyClassesModel> list) {
         this.list = list;
     }
 
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new UserViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item, parent, false));
+        return new UserViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item2, parent, false));
     }
 
     @Override
@@ -35,6 +41,7 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.UserViewHolder
         holder.itemClassName.setText(myClass.className);
         holder.itemClassTimes.setText(myClass.classTimes);
         holder.itemClassDaysPerWeek.setText(myClass.classDays);
+        holder.itemTeacherName.setText(myClass.teacherName);
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -56,7 +63,8 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.UserViewHolder
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassTimes, itemClassDaysPerWeek;
+        TextView itemClassName, itemClassTimes, itemClassDaysPerWeek, itemTeacherName;
+        Button   joinAClassButton;
 
 
         public UserViewHolder(View itemView) {
@@ -65,6 +73,20 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.UserViewHolder
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
             itemClassDaysPerWeek = (TextView) itemView.findViewById(R.id.itemClassDaysPerWeek);
+            itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
+
+            //Implement Join Class button here?
+            joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
+
+            joinAClassButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
+
+
         }
 
     }

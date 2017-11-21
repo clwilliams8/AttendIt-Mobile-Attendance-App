@@ -3,6 +3,7 @@ package com.example.colto.attenditdraft3;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,15 +51,23 @@ public class JoinAClassFragment extends Fragment {
         teacherUsernameInput = (EditText) view.findViewById(R.id.teacherUsernameInput);
         searchForClassesButton = (Button) view.findViewById(R.id.searchForClassesButton);
 
-       /* searchForClassesButton.setOnClickListener(new View.OnClickListener()) {
+        searchForClassesButton.setOnClickListener(new View.OnClickListener() {
             @Override
-                    /// TODO: 11/15/2017 onButtonClick read database reference of all teachers classes, put in recyler view
-            public void onClick(View v) {
-                teachersClasses = database.getReference("TeacherClass").child(teacherUsernameInput.getText().toString());
-                teachersClasses.chi
-                        //setContentView(recylerview fragment)
+            public void onClick(View view) {
+                //Query database for Users-><teacherusernameinput>->set reference for
+                //teachersClasses = database.getReference("Users").child(teacherUsernameInput.getText().toString()).child("MyClasses");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("TEACHER_NAME",teacherUsernameInput.getText().toString());
+                SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
+                searchResultsFragment.setArguments(bundle);
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragment_container, searchResultsFragment, searchResultsFragment.getTag())
+                        .commit();
+
             }
-        };*/
+        });
 
 
 

@@ -7,10 +7,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,49 +17,45 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyClassesFragmentForTeachers extends Fragment {
+public class SearchResultsFragment extends Fragment {
 
-    String teacherUserNameValue;
+    String teacherSearchValue;
 
     private RecyclerView recyclerView;
     private List<MyClassesModel> result;
-    private MyClassesTeacherAdaptor adaptor;
+    private SearchResultsAdaptor adaptor;
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
-    private TextView emptyText;
 
-    public MyClassesFragmentForTeachers() {
+    public SearchResultsFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_classes, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
         Bundle bundle =getArguments();
         if(bundle != null) {
-            teacherUserNameValue = bundle.getString("TEACHER_NAME");
+            teacherSearchValue = bundle.getString("TEACHER_NAME");
         }
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Users").child(teacherUserNameValue).child("MyClasses");
-
-        emptyText = (TextView) view.findViewById(R.id.text_no_data);
+        reference = database.getReference("Users").child(teacherSearchValue).child("MyClasses");
 
         result = new ArrayList<>();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.teacherClassList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.resultClassList);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -71,32 +65,14 @@ public class MyClassesFragmentForTeachers extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.addItemDecoration(itemDecoration);
 
-        adaptor = new MyClassesTeacherAdaptor(result);
+        adaptor = new SearchResultsAdaptor(result);
         recyclerView.setAdapter(adaptor);
 
         updateList(); //IF THIS WORKS REMOVE CREATE RESULT ENTIRELY
 
-        checkIfEmpty();
 
         return view;
     }
-
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case 0:
-                removeUser(item.getGroupId());
-                break;
-            case 1:
-                changeUser(item.getGroupId());
-                break;
-        }
-
-        return super.onContextItemSelected(item);
-    }
-
 
     private void updateList() {
 
@@ -106,7 +82,6 @@ public class MyClassesFragmentForTeachers extends Fragment {
 
                 result.add(dataSnapshot.getValue(MyClassesModel.class));
                 adaptor.notifyDataSetChanged();
-                checkIfEmpty();
             }
 
             @Override
@@ -129,7 +104,6 @@ public class MyClassesFragmentForTeachers extends Fragment {
 
                 result.remove(index);
                 adaptor.notifyItemRemoved(index);
-                checkIfEmpty();
             }
 
             @Override
@@ -156,34 +130,5 @@ public class MyClassesFragmentForTeachers extends Fragment {
         return index;
     }
 
-    private void removeUser(int position) {
-        reference.child(result.get(position).className).removeValue(); //todo
-    }
-
-    private void changeUser(int position) {
-        MyClassesModel myClass = result.get(position);
-        //in video he changes age to 100
-
-        Map<String, Object> userValues = myClass.toMap();
-        Map<String, Object> newUser = new HashMap<>();
-
-        newUser.put(myClass.className, userValues); //todo
-
-        reference.updateChildren(newUser);
-
-    }
-
-    private void checkIfEmpty() {
-        if(result.size() == 0) {
-            recyclerView.setVisibility(View.INVISIBLE);
-            emptyText.setVisibility(View.VISIBLE);
-        }
-        else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyText.setVisibility(View.INVISIBLE);
-        }
-    }
-
-//NOTE YOU ARE AT 28:38 in the video.
 
 }

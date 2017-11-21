@@ -90,8 +90,7 @@ public class CreateAClassFragment extends Fragment {
                         studentLateInput.getText().toString(),
                         absentTimeInput.getText().toString(),
                         daysOfWeekInput.getText().toString(),
-                        "location",
-                        "students enrolled");
+                        "location");
 
                 classes = classOwner.child(teacherUserNameValue); //need to add the each class they create under their name.
                 teacherUser = database.getReference("Users").child(teacherUserNameValue).child("MyClasses");
@@ -106,7 +105,8 @@ public class CreateAClassFragment extends Fragment {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             MyClassesModel myClass = new MyClassesModel(classNameInput.getText().toString(),
                                     startTimeInput.getText().toString(),
-                                    daysOfWeekInput.getText().toString());
+                                    daysOfWeekInput.getText().toString(),
+                                    teacherUserNameValue);
                             teacherUser.child(myClass.getClassName()).setValue((myClass));
                            // teacherUser.child("ClassName").setValue(classNameInput.getText().toString());
                            // teacherUser.child("ClassTimes").setValue(startTimeInput.getText().toString());

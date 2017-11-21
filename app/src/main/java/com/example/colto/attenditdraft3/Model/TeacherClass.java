@@ -15,14 +15,13 @@ public class TeacherClass {
     private String absentTime;
     private String daysOfTheWeek;
     private String location;
-    private String studentsEnrolled;
 
     public TeacherClass(){
 
     }
 
     public TeacherClass(String className,String teacherUsername, String startDate, String endDate, String startTime , String endTime, String lateTime, String absentTime,
-                        String daysOfTheWeek, String location, String studentsEnrolled) {
+                        String daysOfTheWeek, String location) {
         this.className = className;
         this.teacherUsername = teacherUsername;
         this.startDate = startDate;
@@ -33,7 +32,6 @@ public class TeacherClass {
         this.absentTime = absentTime;
         this.daysOfTheWeek = daysOfTheWeek;
         this.location = location;
-        this.studentsEnrolled = studentsEnrolled;
     }
 
     public String getTeacherUsername() {
@@ -104,9 +102,4 @@ public class TeacherClass {
         this.location = location;
     }
 
-    public String getStudentsEnrolled() {
-        return studentsEnrolled;
-    }
-
-    public void setStudentsEnrolled(String studentsEnrolled) {this.studentsEnrolled = studentsEnrolled;}
 }

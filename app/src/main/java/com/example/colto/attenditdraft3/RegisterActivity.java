@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference users;
 
-    EditText editUsername, editPassword, editEmail;
+    EditText editRealName, editUsername, editPassword, editEmail;
     CheckBox instructorCheckbox;
     Button registerButton, signinButton, logOnButton, createAccountButton;
     @Override
@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         users = database.getReference("Users");
         //EditText,Buttons
+        editRealName = (EditText) findViewById(R.id.editFullName);
         editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editEmail = (EditText) findViewById(R.id.editEmail);
@@ -56,10 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final User user = new User(editUsername.getText().toString(),
+                        editRealName.getText().toString(),
                         editPassword.getText().toString(),
                         editEmail.getText().toString(),
-                        instructorCheckbox.isChecked(),
-                        "empty");
+                        instructorCheckbox.isChecked());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
