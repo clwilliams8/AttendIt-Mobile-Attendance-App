@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AttendIt.iml" filepath="$PROJECT_DIR$/AttendIt.iml" />
+      <module fileurl="file://C:\Users\colto\AndroidStudioProjects\AttendItDraft3\AttendIt.iml" filepath="C:\Users\colto\AndroidStudioProjects\AttendItDraft3\AttendIt.iml" />
       <module fileurl="file://C:\Users\colto\AndroidStudioProjects\AttendIt\AttendItDraft3.iml" filepath="C:\Users\colto\AndroidStudioProjects\AttendIt\AttendItDraft3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\colto\AndroidStudioProjects\AttendIt\app\app.iml" filepath="C:\Users\colto\AndroidStudioProjects\AttendIt\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../AttendIt/app/app.iml" filepath="$PROJECT_DIR$/../AttendIt/app/app.iml" />
     </modules>
   </component>
 </project>

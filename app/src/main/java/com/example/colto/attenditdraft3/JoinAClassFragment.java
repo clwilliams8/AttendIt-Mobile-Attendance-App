@@ -44,7 +44,7 @@ public class JoinAClassFragment extends Fragment {
         if(bundle != null) {
             studentUserNameValue = bundle.getString("STUDENT_NAME");
         }
-        
+
         //Local variables
         studentRealNameInput = view.findViewById(R.id.studentRealNameValue);
         studentRealNameValue = studentRealNameInput.getText().toString();
