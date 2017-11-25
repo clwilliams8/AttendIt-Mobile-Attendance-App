@@ -25,9 +25,9 @@ public class JoinAClassFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference teachersClasses; //reference to teacherClasses-<teachername><allteachers child classes>
 
-    EditText teacherUsernameInput;
+    EditText teacherUsernameInput, studentRealNameInput;
     Button searchForClassesButton;
-    String studentUserNameValue;
+    String studentUserNameValue, studentRealNameValue;
 
 
     public JoinAClassFragment() {
@@ -44,9 +44,10 @@ public class JoinAClassFragment extends Fragment {
         if(bundle != null) {
             studentUserNameValue = bundle.getString("STUDENT_NAME");
         }
-
-
+        
         //Local variables
+        studentRealNameInput = view.findViewById(R.id.studentRealNameValue);
+        studentRealNameValue = studentRealNameInput.getText().toString();
         database = FirebaseDatabase.getInstance();
         teacherUsernameInput = (EditText) view.findViewById(R.id.teacherUsernameInput);
         searchForClassesButton = (Button) view.findViewById(R.id.searchForClassesButton);
@@ -59,6 +60,8 @@ public class JoinAClassFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("TEACHER_NAME",teacherUsernameInput.getText().toString());
+                bundle.putString("STUDENT_USER_NAME", studentUserNameValue);
+                bundle.putString("STUDENT_FULL_NAME", studentRealNameValue);
                 SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                 searchResultsFragment.setArguments(bundle);
                 FragmentManager manager = getFragmentManager();

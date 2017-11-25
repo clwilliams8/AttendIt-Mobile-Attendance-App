@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,10 +22,13 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
     FirebaseDatabase database;
     DatabaseReference reference;
+    String studentsUserNameValue, studentsRealNameValue;
     private List<MyClassesModel> list;
 
-    public SearchResultsAdaptor(List<MyClassesModel> list) {
+    public SearchResultsAdaptor(List<MyClassesModel> list, String studentsUserNamePass, String studentsRealNamePass) {
         this.list = list;
+        studentsUserNameValue = studentsUserNamePass;
+        studentsRealNameValue = studentsRealNamePass;
     }
 
     @Override
@@ -67,7 +71,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
         Button   joinAClassButton;
 
 
-        public UserViewHolder(View itemView) {
+        public UserViewHolder(final View itemView) {
             super(itemView);
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
@@ -81,7 +85,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             joinAClassButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
                 }
             });
 
