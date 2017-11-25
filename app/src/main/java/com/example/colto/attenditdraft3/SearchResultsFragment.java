@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +27,7 @@ import java.util.List;
 public class SearchResultsFragment extends Fragment {
 
     String teacherSearchValue;
+    String studentNameValue;
 
     private RecyclerView recyclerView;
     private List<MyClassesModel> result;
@@ -48,6 +50,8 @@ public class SearchResultsFragment extends Fragment {
         Bundle bundle =getArguments();
         if(bundle != null) {
             teacherSearchValue = bundle.getString("TEACHER_NAME");
+            studentNameValue = bundle.getString("STUDENT_NAME");
+
         }
 
         database = FirebaseDatabase.getInstance();
@@ -65,7 +69,7 @@ public class SearchResultsFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.addItemDecoration(itemDecoration);
 
-        adaptor = new SearchResultsAdaptor(result);
+        adaptor = new SearchResultsAdaptor(result, studentNameValue); //pass in the students username because we need it to when they join the a class.
         recyclerView.setAdapter(adaptor);
 
         updateList(); //IF THIS WORKS REMOVE CREATE RESULT ENTIRELY

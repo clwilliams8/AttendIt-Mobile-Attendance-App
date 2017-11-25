@@ -59,6 +59,7 @@ public class JoinAClassFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("TEACHER_NAME",teacherUsernameInput.getText().toString());
+                bundle.putString("STUDENT_NAME", studentUserNameValue);
                 SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                 searchResultsFragment.setArguments(bundle);
                 FragmentManager manager = getFragmentManager();

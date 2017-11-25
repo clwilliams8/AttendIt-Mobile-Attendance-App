@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -20,11 +23,17 @@ import java.util.List;
 public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdaptor.UserViewHolder>  {
 
     FirebaseDatabase database;
-    DatabaseReference reference;
+    DatabaseReference studentEnrolledRef;
+    DatabaseReference studentUserMyClassesRef;
+    String studentUserName;
     private List<MyClassesModel> list;
 
-    public SearchResultsAdaptor(List<MyClassesModel> list) {
+    public SearchResultsAdaptor(List<MyClassesModel> list, String studentsName) {
+
+
+        studentUserName = studentsName;
         this.list = list;
+
     }
 
     @Override
@@ -42,6 +51,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
         holder.itemClassTimes.setText(myClass.classTimes);
         holder.itemClassDaysPerWeek.setText(myClass.classDays);
         holder.itemTeacherName.setText(myClass.teacherName);
+
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -67,13 +77,15 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
         Button   joinAClassButton;
 
 
-        public UserViewHolder(View itemView) {
+
+        public UserViewHolder(final View itemView) {
             super(itemView);
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
             itemClassDaysPerWeek = (TextView) itemView.findViewById(R.id.itemClassDaysPerWeek);
-            itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
+
+
 
             //Implement Join Class button here?
             joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
@@ -81,6 +93,27 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             joinAClassButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    //Firebase References needed
+                    database = FirebaseDatabase.getInstance();
+                    studentEnrolledRef = database.getReference("TeacherClass")
+                            .child(itemTeacherName.getText().toString())
+                            .child(itemClassName.getText().toString())
+                            .child("StudentsEnrolled");
+                    studentUserMyClassesRef = database.getReference("Users")
+                            .child(studentUserName)
+                            .child("MyClasses");
+
+                    //Writing to Firebase that the class has a new student enrolled in it
+                    //And this student has a new class.
+
+                    
+
+
+
+
+
+                    Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
 
                 }
             });
