@@ -20,9 +20,10 @@ import java.util.List;
 
 public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdaptor.UserViewHolder>  {
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    String studentsUserNameValue, studentsRealNameValue;
+    private FirebaseDatabase database;
+    private DatabaseReference studentEnrolledRef;
+    private DatabaseReference studentUserMyClassesRef;
+    private String studentsUserNameValue, studentsRealNameValue;
     private List<MyClassesModel> list;
 
     public SearchResultsAdaptor(List<MyClassesModel> list, String studentsUserNamePass, String studentsRealNamePass) {
@@ -85,6 +86,24 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             joinAClassButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    //Firebase References needed
+                    database = FirebaseDatabase.getInstance();
+                    studentEnrolledRef = database.getReference("TeacherClass")
+                            .child(itemTeacherName.getText().toString())
+                            .child(itemClassName.getText().toString())
+                            .child("StudentsEnrolled");
+                    studentUserMyClassesRef = database.getReference("Users")
+                            .child(studentsUserNameValue)
+                            .child("MyClasses");
+
+                    //Writing to Firebase that the class has a new student enrolled in it
+                    //And this student has a new class.
+
+
+
+
+
                     Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
                 }
             });
