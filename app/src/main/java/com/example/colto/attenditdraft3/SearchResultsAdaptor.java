@@ -104,6 +104,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
 
 
+
                     Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
                 }
             });

@@ -6,7 +6,6 @@ package com.example.colto.attenditdraft3.Model;
 
 public class User {
     private String username;
-    private String realName;
     private String password;
     private String email;
     private Boolean isTeacher;
@@ -15,9 +14,8 @@ public class User {
 
     }
 
-    public User(String username,String realName, String password, String email, Boolean isTeacher) {
+    public User(String username, String password, String email, Boolean isTeacher) {
         this.username = username;
-        this.realName = realName;
         this.password = password;
         this.email = email;
         this.isTeacher = isTeacher;
@@ -27,14 +25,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
     }
 
     public String getPassword() {
