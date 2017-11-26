@@ -9,8 +9,11 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -97,15 +100,40 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                             .child(studentsUserNameValue)
                             .child("MyClasses");
 
+
+
                     //Writing to Firebase that the class has a new student enrolled in it
                     //And this student has a new class.
 
+                    studentEnrolledRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            StudentsEnrolledModel studentsEnrolledModel =
+                                    new StudentsEnrolledModel(studentsRealNameValue, studentsUserNameValue);
 
+                            if (dataSnapshot.child(studentsUserNameValue).exists()) {
+                                Toast.makeText(itemView.getContext(), "You have already joined this class.", Toast.LENGTH_SHORT).show();
 
+                            }
+                            else {
+                                studentEnrolledRef.child(studentsEnrolledModel.getStudentUsername()).setValue(studentsEnrolledModel);
+                                MyClassesModel myClass = new MyClassesModel(itemClassName.getText().toString(),
+                                        itemClassTimes.getText().toString(),
+                                        itemClassDaysPerWeek.getText().toString(),
+                                        itemTeacherName.getText().toString());
+                                studentUserMyClassesRef.child(myClass.getClassName()).setValue((myClass));
+                                Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
 
+                            }
+                        }
 
-                    Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
             });
 
