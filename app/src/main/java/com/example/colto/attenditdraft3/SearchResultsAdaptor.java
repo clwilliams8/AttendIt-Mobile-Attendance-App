@@ -48,8 +48,14 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
         holder.itemClassName.setText(myClass.className);
         holder.itemClassTimes.setText(myClass.classTimes);
-        holder.itemClassDaysPerWeek.setText(myClass.classDays);
         holder.itemTeacherName.setText(myClass.teacherName);
+        holder.day1.setText(myClass.day1);
+        holder.day2.setText(myClass.day2);
+        holder.day3.setText(myClass.day3);
+        holder.day4.setText(myClass.day4);
+        holder.day5.setText(myClass.day5);
+        holder.day6.setText(myClass.day6);
+        holder.day7.setText(myClass.day7);
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -71,7 +77,8 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassTimes, itemClassDaysPerWeek, itemTeacherName;
+        TextView itemClassName, itemClassTimes, itemTeacherName;
+        TextView day1, day2, day3, day4, day5, day6, day7;
         Button   joinAClassButton;
 
 
@@ -80,9 +87,15 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
-            itemClassDaysPerWeek = (TextView) itemView.findViewById(R.id.itemClassDaysPerWeek);
             itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
             joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
+            day1 = (TextView) itemView.findViewById(R.id.day1);
+            day2 = (TextView) itemView.findViewById(R.id.day2);
+            day3 = (TextView) itemView.findViewById(R.id.day3);
+            day4 = (TextView) itemView.findViewById(R.id.day4);
+            day5 = (TextView) itemView.findViewById(R.id.day5);
+            day6 = (TextView) itemView.findViewById(R.id.day6);
+            day7 = (TextView) itemView.findViewById(R.id.day7);
 
             joinAClassButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -118,8 +131,14 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                                 studentEnrolledRef.child(studentsEnrolledModel.getStudentUsername()).setValue(studentsEnrolledModel);
                                 MyClassesModel myClass = new MyClassesModel(itemClassName.getText().toString(),
                                         itemClassTimes.getText().toString(),
-                                        itemClassDaysPerWeek.getText().toString(),
-                                        itemTeacherName.getText().toString());
+                                        itemTeacherName.getText().toString(),
+                                        day1.getText().toString(),
+                                        day2.getText().toString(),
+                                        day3.getText().toString(),
+                                        day4.getText().toString(),
+                                        day5.getText().toString(),
+                                        day6.getText().toString(),
+                                        day7.getText().toString());
                                 studentUserMyClassesRef.child(myClass.getClassName()).setValue((myClass));
                                 Toast.makeText(itemView.getContext(), "You Have Successfully Joined " + itemClassName.getText().toString(), Toast.LENGTH_LONG).show();
 

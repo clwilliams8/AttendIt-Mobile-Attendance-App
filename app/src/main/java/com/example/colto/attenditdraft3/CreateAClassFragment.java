@@ -8,21 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.colto.attenditdraft3.Model.TeacherClass;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -42,7 +35,8 @@ public class CreateAClassFragment extends Fragment {
 
 
    // TextView createClassTitle, className, startDate, endDate,startTime,endTime,studentLateTime,absentTime,daysOfWeek,setLocationTitle;
-    EditText classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput,daysOfWeekInput;
+    EditText classNameInput,startDateInput,endDateInput,startTimeInput,endTimeInput,studentLateInput,absentTimeInput;
+    EditText day1,day2,day3,day4,day5,day6,day7;
     Button createClassButton;
 
     public CreateAClassFragment() {
@@ -73,7 +67,14 @@ public class CreateAClassFragment extends Fragment {
         endTimeInput = (EditText) view.findViewById(R.id.endTimeInput);
         studentLateInput = (EditText) view.findViewById(R.id.studentLateInput);
         absentTimeInput = (EditText) view.findViewById(R.id.absentTimeInput);
-        daysOfWeekInput = (EditText) view.findViewById(R.id.daysOfWeekInput);
+        day1 = (EditText) view.findViewById(R.id.day1);
+        day2 = (EditText) view.findViewById(R.id.day2);
+        day3 = (EditText) view.findViewById(R.id.day3);
+        day4 = (EditText) view.findViewById(R.id.day4);
+        day5 = (EditText) view.findViewById(R.id.day5);
+        day6 = (EditText) view.findViewById(R.id.day6);
+        day7 = (EditText) view.findViewById(R.id.day7);
+
         createClassButton = (Button) view.findViewById(R.id.createClassButton);
 
         createClassButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +90,13 @@ public class CreateAClassFragment extends Fragment {
                         endTimeInput.getText().toString(),
                         studentLateInput.getText().toString(),
                         absentTimeInput.getText().toString(),
-                        daysOfWeekInput.getText().toString(),
+                        day1.getText().toString(),
+                        day2.getText().toString(),
+                        day3.getText().toString(),
+                        day4.getText().toString(),
+                        day5.getText().toString(),
+                        day6.getText().toString(),
+                        day7.getText().toString(),
                         "location");
 
                 classes = classOwner.child(teacherUserNameValue); //need to add the each class they create under their name.
@@ -105,8 +112,14 @@ public class CreateAClassFragment extends Fragment {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             MyClassesModel myClass = new MyClassesModel(classNameInput.getText().toString(),
                                     startTimeInput.getText().toString(),
-                                    daysOfWeekInput.getText().toString(),
-                                    teacherUserNameValue);
+                                    teacherUserNameValue,
+                                    day1.getText().toString(),
+                                    day2.getText().toString(),
+                                    day3.getText().toString(),
+                                    day4.getText().toString(),
+                                    day5.getText().toString(),
+                                    day6.getText().toString(),
+                                    day7.getText().toString());
                             teacherUser.child(myClass.getClassName()).setValue((myClass));
                            // teacherUser.child("ClassName").setValue(classNameInput.getText().toString());
                            // teacherUser.child("ClassTimes").setValue(startTimeInput.getText().toString());

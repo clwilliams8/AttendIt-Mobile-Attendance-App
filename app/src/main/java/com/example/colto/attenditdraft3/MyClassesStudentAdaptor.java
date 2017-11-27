@@ -31,9 +31,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -69,7 +72,27 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
         holder.itemClassName.setText(myClass.className);
         holder.itemClassTimes.setText(myClass.classTimes);
-        holder.itemClassDaysPerWeek.setText(myClass.classDays);
+        holder.day1.setText(myClass.day1);
+        holder.day2.setText(myClass.day2);
+        holder.day3.setText(myClass.day3);
+        holder.day4.setText(myClass.day4);
+        holder.day5.setText(myClass.day5);
+        holder.day6.setText(myClass.day6);
+        holder.day7.setText(myClass.day7);
+        ////BUTTON NOT CLICKABLE UNTIL DAY AND TIME ARE CORRECT
+        holder.signInButton.setEnabled(false);
+        String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm a"); // you are here
+        if(weekday_name.equals(holder.day1.getText().toString())
+                | weekday_name.equals(holder.day2.getText().toString())
+                | weekday_name.equals(holder.day3.getText().toString())
+                | weekday_name.equals(holder.day4.getText().toString())
+                | weekday_name.equals(holder.day5.getText().toString())
+                | weekday_name.equals(holder.day6.getText().toString())
+                | weekday_name.equals(holder.day7.getText().toString())) {
+            holder.signInButton.setEnabled(true);
+        }
+
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -92,6 +115,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
         TextView itemClassName, itemClassTimes, itemClassDaysPerWeek;
+        TextView day1, day2, day3, day4, day5, day6, day7;
         Button signInButton;
 
 
@@ -100,55 +124,15 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassNameForStudent);
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimesForStudent);
-            itemClassDaysPerWeek = (TextView) itemView.findViewById(R.id.itemClassDaysPerWeekForStudent);
             signInButton = (Button) itemView.findViewById(R.id.SignInButtonForStudents);
+            day1 = (TextView) itemView.findViewById(R.id.day1);
+            day2 = (TextView) itemView.findViewById(R.id.day2);
+            day3 = (TextView) itemView.findViewById(R.id.day3);
+            day4 = (TextView) itemView.findViewById(R.id.day4);
+            day5 = (TextView) itemView.findViewById(R.id.day5);
+            day6 = (TextView) itemView.findViewById(R.id.day6);
+            day7 = (TextView) itemView.findViewById(R.id.day7);
 
-
-            //BUTTON NOT CLICKABLE UNTIL TIME, DAY, AND LOCATION ARE CORRECT
-            signInButton.setClickable(false);
-            boolean dayCorrect = false;
-            Calendar calendar = Calendar.getInstance();
-            int day = calendar.get(Calendar.DAY_OF_WEEK);
-
-            switch (day) {
-                case Calendar.SUNDAY:
-                    // Current day is Sunday
-                    if(itemClassDaysPerWeek.getText().toString() == "Sunday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.MONDAY:
-                    // Current day is Monday
-                    if(itemClassDaysPerWeek.getText().toString() == "Monday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.TUESDAY:
-                    // etc.
-                    if(itemClassDaysPerWeek.getText().toString() == "Tuesday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.WEDNESDAY:
-                    if(itemClassDaysPerWeek.getText().toString() == "Wednesday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.THURSDAY:
-                    if(itemClassDaysPerWeek.getText().toString() == "Thursday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.FRIDAY:
-                    if(itemClassDaysPerWeek.getText().toString() == "Friday")
-                        dayCorrect = true;
-                    break;
-                case Calendar.SATURDAY:
-                    if(itemClassDaysPerWeek.getText().toString() == "Saturday")
-                        dayCorrect = true;
-                    break;
-            }
-
-
-
-
-
-            //check conditions... then toast
 
             //Toast.makeText(itemView.getContext(), "You may sign into " + itemClassName.getText().toString(), Toast.LENGTH_SHORT).show();
 
@@ -156,7 +140,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                 @Override
                 public void onClick(View view) {
                     //ONCLICK - FINGERPRINT AUTH.
-
+                    Toast.makeText(itemView.getContext(), "Its the correct day of the week boy", Toast.LENGTH_SHORT).show();
+                            //below is fingerprint stuff that didnt work
 
 //                    KeyguardManager keyguardManager;
 //                    keyguardManager = (KeyguardManager) itemView.getContext().getSystemService(Context.KEYGUARD_SERVICE);
@@ -238,12 +223,6 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 //                    CancellationSignal cancellationSignal = new CancellationSignal();
 //
 //                    fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0 ,new AuthenticationHandler(itemView.getContext()), null);
-
-
-
-
-
-
 
 
                     //ON AUTH - CREATE RECORD IF DOESN'T EXIST, UPDATE RECORD WITH PRESENT,LATE,ABSENT MARK
