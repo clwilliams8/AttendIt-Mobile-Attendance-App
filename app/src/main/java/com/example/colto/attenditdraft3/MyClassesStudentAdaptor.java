@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -71,7 +73,9 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         MyClassesModel myClass = list.get(position);
 
         holder.itemClassName.setText(myClass.className);
-        holder.itemClassTimes.setText(myClass.classTimes);
+        holder.itemClassStartTime.setText(myClass.classStartTime);
+        holder.itemClassLateTime.setText(myClass.classLateTime);
+        holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
         holder.day1.setText(myClass.day1);
         holder.day2.setText(myClass.day2);
         holder.day3.setText(myClass.day3);
@@ -114,7 +118,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassTimes, itemClassDaysPerWeek;
+        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemClassDaysPerWeek;
         TextView day1, day2, day3, day4, day5, day6, day7;
         Button signInButton;
 
@@ -123,8 +127,9 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             super(itemView);
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassNameForStudent);
-            itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimesForStudent);
-            signInButton = (Button) itemView.findViewById(R.id.SignInButtonForStudents);
+            itemClassStartTime = (TextView) itemView.findViewById(R.id.itemClassTimesForStudent);
+            itemClassLateTime = (TextView) itemView.findViewById(R.id.classLateTime);
+            itemClassAbsentTime = (TextView) itemView.findViewById(R.id.classAbsentTime);
             day1 = (TextView) itemView.findViewById(R.id.day1);
             day2 = (TextView) itemView.findViewById(R.id.day2);
             day3 = (TextView) itemView.findViewById(R.id.day3);
@@ -132,6 +137,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             day5 = (TextView) itemView.findViewById(R.id.day5);
             day6 = (TextView) itemView.findViewById(R.id.day6);
             day7 = (TextView) itemView.findViewById(R.id.day7);
+
+            signInButton = (Button) itemView.findViewById(R.id.SignInButtonForStudents);
 
 
             //Toast.makeText(itemView.getContext(), "You may sign into " + itemClassName.getText().toString(), Toast.LENGTH_SHORT).show();

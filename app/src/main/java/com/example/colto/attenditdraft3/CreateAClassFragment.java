@@ -112,6 +112,8 @@ public class CreateAClassFragment extends Fragment {
                             classes.child(teacherClass.getClassName()).setValue(teacherClass);
                             MyClassesModel myClass = new MyClassesModel(classNameInput.getText().toString(),
                                     startTimeInput.getText().toString(),
+                                    studentLateInput.getText().toString(),
+                                    absentTimeInput.getText().toString(),
                                     teacherUserNameValue,
                                     day1.getText().toString(),
                                     day2.getText().toString(),

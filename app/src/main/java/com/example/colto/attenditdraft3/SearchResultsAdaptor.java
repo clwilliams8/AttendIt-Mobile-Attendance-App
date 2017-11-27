@@ -47,7 +47,9 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
         MyClassesModel myClass = list.get(position);
 
         holder.itemClassName.setText(myClass.className);
-        holder.itemClassTimes.setText(myClass.classTimes);
+        holder.itemClassStartTime.setText(myClass.classStartTime);
+        holder.itemClassLateTime.setText(myClass.classLateTime);
+        holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
         holder.itemTeacherName.setText(myClass.teacherName);
         holder.day1.setText(myClass.day1);
         holder.day2.setText(myClass.day2);
@@ -77,7 +79,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassTimes, itemTeacherName;
+        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemTeacherName;
         TextView day1, day2, day3, day4, day5, day6, day7;
         Button   joinAClassButton;
 
@@ -86,7 +88,9 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             super(itemView);
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
-            itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
+            itemClassStartTime = (TextView) itemView.findViewById(R.id.itemClassTimes);
+            itemClassLateTime = (TextView) itemView.findViewById(R.id.classLateTime);
+            itemClassAbsentTime = (TextView) itemView.findViewById(R.id.classAbsentTime);
             itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
             joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
             day1 = (TextView) itemView.findViewById(R.id.day1);
@@ -130,7 +134,9 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                             else {
                                 studentEnrolledRef.child(studentsEnrolledModel.getStudentUsername()).setValue(studentsEnrolledModel);
                                 MyClassesModel myClass = new MyClassesModel(itemClassName.getText().toString(),
-                                        itemClassTimes.getText().toString(),
+                                        itemClassStartTime.getText().toString(),
+                                        itemClassLateTime.getText().toString(),
+                                        itemClassAbsentTime.getText().toString(),
                                         itemTeacherName.getText().toString(),
                                         day1.getText().toString(),
                                         day2.getText().toString(),

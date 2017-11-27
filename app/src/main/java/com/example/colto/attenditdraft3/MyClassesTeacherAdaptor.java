@@ -33,7 +33,7 @@ public class MyClassesTeacherAdaptor extends RecyclerView.Adapter<MyClassesTeach
         MyClassesModel myClass = list.get(position);
 
         holder.itemClassName.setText(myClass.className);
-        holder.itemClassTimes.setText(myClass.classTimes);
+        holder.itemClassTimes.setText(myClass.classStartTime);
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
