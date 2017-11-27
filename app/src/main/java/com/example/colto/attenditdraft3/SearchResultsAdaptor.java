@@ -82,8 +82,6 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
             itemClassDaysPerWeek = (TextView) itemView.findViewById(R.id.itemClassDaysPerWeek);
             itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
-
-            //Implement Join Class button here?
             joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
 
             joinAClassButton.setOnClickListener(new View.OnClickListener() {

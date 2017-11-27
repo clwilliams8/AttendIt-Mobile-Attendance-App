@@ -1,20 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_my_classes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.colto.attenditdraft3.MyClassesFragmentForStudents">
+    tools:context="com.example.colto.attenditdraft3.MyClassesFragmentForTeachers">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MyClassesView"
-        android:padding="8dp"
-        android:textColor="#FFF"
-        android:background="@color/colorPrimary"
-        android:textSize="28sp"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/studentClassList"
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/text_no_data_student"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:text="You have not joined any classes yet! Click the button in the top right corner to get started."
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
