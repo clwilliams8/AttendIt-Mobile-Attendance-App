@@ -138,6 +138,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                                         itemClassLateTime.getText().toString(),
                                         itemClassAbsentTime.getText().toString(),
                                         itemTeacherName.getText().toString(),
+                                        studentsRealNameValue,
                                         day1.getText().toString(),
                                         day2.getText().toString(),
                                         day3.getText().toString(),

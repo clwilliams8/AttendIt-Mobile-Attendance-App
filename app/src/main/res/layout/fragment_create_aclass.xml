@@ -84,7 +84,7 @@
      android:layout_marginTop="8dp"
      android:ems="10"
      android:hint="8:00AM"
-     android:inputType="time"
+     android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/endDateInput" />
 
@@ -102,17 +102,17 @@
      app:layout_constraintRight_toLeftOf="@+id/startTimeInput"
      app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-<EditText
-    android:id="@+id/endTimeInput"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="8:50AM"
-    android:inputType="time"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/startTimeInput" />
+ <EditText
+     android:id="@+id/endTimeInput"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginRight="8dp"
+     android:layout_marginTop="8dp"
+     android:ems="10"
+     android:hint="8:50AM"
+     android:inputType="textPersonName"
+     app:layout_constraintRight_toRightOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/startTimeInput" />
 
 <TextView
     android:id="@+id/endTime"
@@ -128,17 +128,17 @@
     app:layout_constraintRight_toLeftOf="@+id/endTimeInput"
     app:layout_constraintTop_toBottomOf="@+id/startTime" />
 
-<EditText
-    android:id="@+id/studentLateInput"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="8:15AM"
-    android:inputType="time"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/endTimeInput" />
+ <EditText
+     android:id="@+id/studentLateInput"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginRight="8dp"
+     android:layout_marginTop="8dp"
+     android:ems="10"
+     android:hint="8:15AM"
+     android:inputType="textPersonName"
+     app:layout_constraintRight_toRightOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/endTimeInput" />
 
  <TextView
      android:id="@+id/studentLate"
@@ -172,11 +172,11 @@
      android:id="@+id/absentTimeInput"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:ems="10"
-     android:hint="8:25AM"
-     android:inputType="time"
      android:layout_marginRight="8dp"
      android:layout_marginTop="8dp"
+     android:ems="10"
+     android:hint="8:25AM"
+     android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/studentLateInput" />
 

@@ -7,6 +7,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
@@ -22,6 +23,9 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -34,7 +38,10 @@ import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +63,9 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
     private List<MyClassesModel> list;
     private StudentActivity studentActivity;
     private String KEY_NAME = "somekeyname";
+    private FirebaseDatabase database;
+    private DatabaseReference teacherRecord;
+    private DatabaseReference studentRecord;
 
     public MyClassesStudentAdaptor(List<MyClassesModel> list) {
         this.list = list;
@@ -76,6 +86,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         holder.itemClassStartTime.setText(myClass.classStartTime);
         holder.itemClassLateTime.setText(myClass.classLateTime);
         holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
+        holder.teacherName.setText(myClass.teacherName);
+        holder.studentNameValue.setText(myClass.studentName);
         holder.day1.setText(myClass.day1);
         holder.day2.setText(myClass.day2);
         holder.day3.setText(myClass.day3);
@@ -83,17 +95,71 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         holder.day5.setText(myClass.day5);
         holder.day6.setText(myClass.day6);
         holder.day7.setText(myClass.day7);
+
+
         ////BUTTON NOT CLICKABLE UNTIL DAY AND TIME ARE CORRECT
         holder.signInButton.setEnabled(false);
-        String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm a"); // you are here
-        if(weekday_name.equals(holder.day1.getText().toString())
-                | weekday_name.equals(holder.day2.getText().toString())
-                | weekday_name.equals(holder.day3.getText().toString())
-                | weekday_name.equals(holder.day4.getText().toString())
-                | weekday_name.equals(holder.day5.getText().toString())
-                | weekday_name.equals(holder.day6.getText().toString())
-                | weekday_name.equals(holder.day7.getText().toString())) {
+        Boolean isCorrectDay = false;
+        Boolean isCorrectTime = true;
+        String currentWeekDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
+        //DateFormat currentTime = new SimpleDateFormat("h:mm a"); //get the exact time in format "8:00am"
+        Calendar cal = Calendar.getInstance();
+        String timeGiven = holder.itemClassStartTime.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        Date time1 = null;
+        try {
+            time1 = sdf.parse(timeGiven); //start time of the class is set
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String currentTime = sdf.format(new Date());
+        Date time2 = null;
+
+        try {
+            time2 = sdf.parse(currentTime); //currentTime
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        if (time1.compareTo(time2) <= 0) {
+
+            //if the startTime of class is less than the currentTime, then not time for sign in
+            isCorrectTime = false;
+
+        } else if (time1.compareTo(time2) >= 0) {
+
+            //if the startTime of class is greater than the currentTime, then its time for class
+            isCorrectTime = true;
+
+        } else {
+
+            //Times are the same
+            isCorrectTime = true;
+
+        }
+
+
+
+        //String realTime = sdf.format(cal.getTime());
+
+
+        //If currentWeekDay is = any of the class days, then isCorrectDay is true.
+
+        if(currentWeekDay.equals(holder.day1.getText().toString())
+                | currentWeekDay.equals(holder.day2.getText().toString())
+                | currentWeekDay.equals(holder.day3.getText().toString())
+                | currentWeekDay.equals(holder.day4.getText().toString())
+                | currentWeekDay.equals(holder.day5.getText().toString())
+                | currentWeekDay.equals(holder.day6.getText().toString())
+                | currentWeekDay.equals(holder.day7.getText().toString())) {
+            isCorrectDay = true;
+            holder.signInButton.setEnabled(true);
+        }
+
+        if(isCorrectDay && isCorrectTime){
             holder.signInButton.setEnabled(true);
         }
 
@@ -118,8 +184,9 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemClassDaysPerWeek;
+        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime;
         TextView day1, day2, day3, day4, day5, day6, day7;
+        TextView teacherName, studentNameValue;
         Button signInButton;
 
 
@@ -137,6 +204,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             day5 = (TextView) itemView.findViewById(R.id.day5);
             day6 = (TextView) itemView.findViewById(R.id.day6);
             day7 = (TextView) itemView.findViewById(R.id.day7);
+            teacherName = (TextView) itemView.findViewById(R.id.teacherName);
+            studentNameValue = (TextView) itemView.findViewById(R.id.studentNameValue);
 
             signInButton = (Button) itemView.findViewById(R.id.SignInButtonForStudents);
 
@@ -178,7 +247,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 //                    }
 //
 //
-//                    try {
+//                    try {   // BREAKS HERE
 //                        keyStore.load(null);
 //                        KeyGenParameterSpec.Builder builder = new KeyGenParameterSpec.Builder(KEY_NAME,
 //                                KeyProperties.PURPOSE_ENCRYPT |
@@ -234,7 +303,33 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
                     //ON AUTH - CREATE RECORD IF DOESN'T EXIST, UPDATE RECORD WITH PRESENT,LATE,ABSENT MARK
 
+                            //Put records into database
 
+                    //DATABASE - User signed in, so make a Teacher record and Student record.
+
+                    database = FirebaseDatabase.getInstance();
+
+                    //teacherRecord
+                    teacherRecord = database.getReference("TeacherClass")
+                            .child(teacherName.getText().toString())
+                            .child(itemClassName.getText().toString())
+                            .child("ClassRecord").child(studentNameValue.getText().toString());
+
+                    //studentRecord
+                    studentRecord = database.getReference("TeacherClass")
+                            .child(teacherName.getText().toString())
+                            .child(itemClassName.getText().toString())
+                            .child("StudentsEnrolled").child(studentNameValue.getText().toString())
+                            .child("StudentRecord");
+
+                    //Create records:
+
+                    
+
+
+
+
+                    Toast.makeText(itemView.getContext(), "Made it thru ref", Toast.LENGTH_SHORT).show();
 
 
 
