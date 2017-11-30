@@ -100,53 +100,38 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         ////BUTTON NOT CLICKABLE UNTIL DAY AND TIME ARE CORRECT
         holder.signInButton.setEnabled(false);
         Boolean isCorrectDay = false;
-        Boolean isCorrectTime = true;
+        Boolean isCorrectTime = false;
         String currentWeekDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
         //DateFormat currentTime = new SimpleDateFormat("h:mm a"); //get the exact time in format "8:00am"
         Calendar cal = Calendar.getInstance();
         String timeGiven = holder.itemClassStartTime.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-        Date time1 = null;
+        Date startTime = null;
         try {
-            time1 = sdf.parse(timeGiven); //start time of the class is set
+            startTime = sdf.parse(timeGiven); //start time of the class is set
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         String currentTime = sdf.format(new Date());
-        Date time2 = null;
+        Date realTime = null;
 
         try {
-            time2 = sdf.parse(currentTime); //currentTime
+            realTime = sdf.parse(currentTime); //currentTime
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
 
-        if (time1.compareTo(time2) <= 0) {
 
-            //if the startTime of class is less than the currentTime, then not time for sign in
-            isCorrectTime = false;
-
-        } else if (time1.compareTo(time2) >= 0) {
-
-            //if the startTime of class is greater than the currentTime, then its time for class
+        if(startTime.equals(realTime))
+            isCorrectTime = true;
+        if(realTime.after(startTime))
             isCorrectTime = true;
 
-        } else {
 
-            //Times are the same
-            isCorrectTime = true;
-
-        }
-
-
-
-        //String realTime = sdf.format(cal.getTime());
-
-
-        //If currentWeekDay is = any of the class days, then isCorrectDay is true.
 
         if(currentWeekDay.equals(holder.day1.getText().toString())
                 | currentWeekDay.equals(holder.day2.getText().toString())
@@ -156,7 +141,6 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                 | currentWeekDay.equals(holder.day6.getText().toString())
                 | currentWeekDay.equals(holder.day7.getText().toString())) {
             isCorrectDay = true;
-            holder.signInButton.setEnabled(true);
         }
 
         if(isCorrectDay && isCorrectTime){
@@ -322,9 +306,10 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                             .child("StudentsEnrolled").child(studentNameValue.getText().toString())
                             .child("StudentRecord");
 
-                    //Create records:
+                    //Writing records to Firebase:
 
-                    
+
+
 
 
 
