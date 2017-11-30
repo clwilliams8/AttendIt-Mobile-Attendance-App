@@ -99,22 +99,38 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
         ////BUTTON NOT CLICKABLE UNTIL DAY AND TIME ARE CORRECT
         holder.signInButton.setEnabled(false);
+
+        //Set up variables for correct day and time
         Boolean isCorrectDay = false;
         Boolean isCorrectTime = false;
+
+        //Get the currentWeekDay by asking the Operating system to give it to us with this fancy line of code that works
+        //but makes no sense.
         String currentWeekDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
-        //DateFormat currentTime = new SimpleDateFormat("h:mm a"); //get the exact time in format "8:00am"
-        Calendar cal = Calendar.getInstance();
-        String timeGiven = holder.itemClassStartTime.getText().toString();
+
+        //Need variables for given times; class startTime, and absentTime
+        //In order to make the button clickable inbetween these two times
+        //and not clickable before or after these times.
+        String startTimeString = holder.itemClassStartTime.getText().toString();
+        String absentTimeString = holder.itemClassAbsentTime.getText().toString();
+
+        //Then we create a date format for the class time. h:mm:a = hours:minutes: AM or PM
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+
+        //make date objects for startTime and absentTime
         Date startTime = null;
+        Date absentTime = null;
+
+
         try {
-            startTime = sdf.parse(timeGiven); //start time of the class is set
+            startTime = sdf.parse(startTimeString); //start time of the class is set
+            absentTime = sdf.parse(absentTimeString);// absent time of class (end) time
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        String currentTime = sdf.format(new Date());
+        String currentTime = sdf.format(new Date()); // get the real time of the world.
         Date realTime = null;
 
         try {
@@ -125,14 +141,17 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
 
 
-
-        if(startTime.equals(realTime))
+        //Compares RealTime from operating system to the StartTime of the class
+        //If the Real time is between the Start time and the Absent time set by the teacher
+        //Then we pass the time constraint part of the sign-in button
+        if(startTime.equals(realTime) | realTime.after(startTime))
             isCorrectTime = true;
-        if(realTime.after(startTime))
-            isCorrectTime = true;
+        if(realTime.after(absentTime))
+            isCorrectTime = false;
 
 
-
+        //Here we check to see if the current weekday is = to any of the days of the week that
+        //the class has class.
         if(currentWeekDay.equals(holder.day1.getText().toString())
                 | currentWeekDay.equals(holder.day2.getText().toString())
                 | currentWeekDay.equals(holder.day3.getText().toString())
@@ -143,6 +162,9 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             isCorrectDay = true;
         }
 
+
+        //If it is both the correct day of the week and the correct time
+        //then we enable the sign-in button to become clickable for  the user.
         if(isCorrectDay && isCorrectTime){
             holder.signInButton.setEnabled(true);
         }
@@ -200,7 +222,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                 @Override
                 public void onClick(View view) {
                     //ONCLICK - FINGERPRINT AUTH.
-                    Toast.makeText(itemView.getContext(), "Its the correct day of the week boy", Toast.LENGTH_SHORT).show();
+
                             //below is fingerprint stuff that didnt work
 
 //                    KeyguardManager keyguardManager;
@@ -307,7 +329,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                             .child("StudentRecord");
 
                     //Writing records to Firebase:
-
+                    
 
 
 
