@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -50,6 +52,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
         holder.itemClassStartTime.setText(myClass.classStartTime);
         holder.itemClassLateTime.setText(myClass.classLateTime);
         holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
+        holder.itemClassEndTime.setText(myClass.classEndTime);
         holder.itemTeacherName.setText(myClass.teacherName);
         holder.day1.setText(myClass.day1);
         holder.day2.setText(myClass.day2);
@@ -79,7 +82,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemTeacherName;
+        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemClassEndTime, itemTeacherName;
         TextView day1, day2, day3, day4, day5, day6, day7;
         Button   joinAClassButton;
 
@@ -91,6 +94,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
             itemClassStartTime = (TextView) itemView.findViewById(R.id.itemClassTimes);
             itemClassLateTime = (TextView) itemView.findViewById(R.id.classLateTime);
             itemClassAbsentTime = (TextView) itemView.findViewById(R.id.classAbsentTime);
+            itemClassEndTime = (TextView) itemView.findViewById(R.id.classEndTime2);
             itemTeacherName = (TextView) itemView.findViewById(R.id.itemTeacherName);
             joinAClassButton = (Button) itemView.findViewById(R.id.JoinClassButton);
             day1 = (TextView) itemView.findViewById(R.id.day1);
@@ -137,6 +141,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                                         itemClassStartTime.getText().toString(),
                                         itemClassLateTime.getText().toString(),
                                         itemClassAbsentTime.getText().toString(),
+                                        itemClassEndTime.getText().toString(),
                                         itemTeacherName.getText().toString(),
                                         studentsRealNameValue,
                                         day1.getText().toString(),

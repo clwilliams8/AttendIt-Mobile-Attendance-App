@@ -34,6 +34,9 @@ public class MyClassesTeacherAdaptor extends RecyclerView.Adapter<MyClassesTeach
 
         holder.itemClassName.setText(myClass.className);
         holder.itemClassTimes.setText(myClass.classStartTime);
+        holder.itemDay1.setText(myClass.day1);
+        holder.itemDay2.setText(myClass.day2);
+        holder.itemDay3.setText(myClass.day3);
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -55,7 +58,7 @@ public class MyClassesTeacherAdaptor extends RecyclerView.Adapter<MyClassesTeach
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassTimes;
+        TextView itemClassName, itemClassTimes, itemDay1, itemDay2, itemDay3;
 
 
         public UserViewHolder(View itemView) {
@@ -63,6 +66,9 @@ public class MyClassesTeacherAdaptor extends RecyclerView.Adapter<MyClassesTeach
 
             itemClassName = (TextView) itemView.findViewById(R.id.itemClassName);
             itemClassTimes = (TextView) itemView.findViewById(R.id.itemClassTimes);
+            itemDay1 = (TextView) itemView.findViewById(R.id.itemDay1);
+            itemDay2 = (TextView) itemView.findViewById(R.id.itemDay2);
+            itemDay3 = (TextView) itemView.findViewById(R.id.itemDay3);
 
         }
 

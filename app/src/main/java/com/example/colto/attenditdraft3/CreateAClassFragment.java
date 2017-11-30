@@ -114,6 +114,7 @@ public class CreateAClassFragment extends Fragment {
                                     startTimeInput.getText().toString(),
                                     studentLateInput.getText().toString(),
                                     absentTimeInput.getText().toString(),
+                                    endTimeInput.getText().toString(),
                                     teacherUserNameValue,
                                     "",
                                     day1.getText().toString(),

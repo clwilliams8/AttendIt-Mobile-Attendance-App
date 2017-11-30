@@ -9,18 +9,19 @@ import java.util.Map;
 
 public class MyClassesModel {
 
-    String className, classStartTime, classLateTime, classAbsentTime, teacherName, studentName, day1, day2, day3, day4, day5, day6, day7;
+    String className, classStartTime, classLateTime, classAbsentTime, classEndTime, teacherName, studentName, day1, day2, day3, day4, day5, day6, day7;
 
     public MyClassesModel(){
 
     }
 
 
-    public MyClassesModel(String className, String classStartTime, String classLateTime, String classAbsentTime, String teacherName, String studentName, String day1, String day2, String day3, String day4, String day5, String day6, String day7) {
+    public MyClassesModel(String className, String classStartTime, String classLateTime, String classAbsentTime, String classEndTime, String teacherName, String studentName, String day1, String day2, String day3, String day4, String day5, String day6, String day7) {
         this.className = className;
         this.classStartTime = classStartTime;
         this.classLateTime = classLateTime;
         this.classAbsentTime = classAbsentTime;
+        this.classEndTime = classEndTime;
         this.teacherName = teacherName;
         this.studentName = studentName;
         this.day1 = day1;
@@ -51,6 +52,10 @@ public class MyClassesModel {
     public String getClassAbsentTime() {return classAbsentTime;}
 
     public void setClassAbsentTime(String classAbsentTime) {this.classAbsentTime = classAbsentTime;}
+
+    public String getClassEndTime() {return classEndTime;}
+
+    public void setClassEndTime(String classEndTime) {this.classEndTime = classEndTime;}
 
     public String getDay1() {return day1;}
 
@@ -94,6 +99,7 @@ public class MyClassesModel {
         result.put("classStartTime", classStartTime);
         result.put("classLateTime", classLateTime);
         result.put("classAbsentTime", classAbsentTime);
+        result.put("classEndTime", classEndTime);
         result.put("teacherName", teacherName);
         result.put("studentName", studentName);
         result.put("day1", day1);

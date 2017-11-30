@@ -23,8 +23,11 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -86,6 +89,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         holder.itemClassStartTime.setText(myClass.classStartTime);
         holder.itemClassLateTime.setText(myClass.classLateTime);
         holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
+        holder.itemClassEndTime.setText(myClass.classEndTime);
         holder.teacherName.setText(myClass.teacherName);
         holder.studentNameValue.setText(myClass.studentName);
         holder.day1.setText(myClass.day1);
@@ -108,23 +112,23 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         //but makes no sense.
         String currentWeekDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
 
-        //Need variables for given times; class startTime, and absentTime
+        //Need variables for given times; class startTime, and endTime
         //In order to make the button clickable inbetween these two times
         //and not clickable before or after these times.
         String startTimeString = holder.itemClassStartTime.getText().toString();
-        String absentTimeString = holder.itemClassAbsentTime.getText().toString();
+        String endTimeString = holder.itemClassEndTime.getText().toString();
 
         //Then we create a date format for the class time. h:mm:a = hours:minutes: AM or PM
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
 
         //make date objects for startTime and absentTime
         Date startTime = null;
-        Date absentTime = null;
+        Date endTime = null;
 
 
         try {
             startTime = sdf.parse(startTimeString); //start time of the class is set
-            absentTime = sdf.parse(absentTimeString);// absent time of class (end) time
+            endTime = sdf.parse(endTimeString);// absent time of class (end) time
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -146,7 +150,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         //Then we pass the time constraint part of the sign-in button
         if(startTime.equals(realTime) | realTime.after(startTime))
             isCorrectTime = true;
-        if(realTime.after(absentTime))
+        if(realTime.after(endTime))
             isCorrectTime = false;
 
 
@@ -190,7 +194,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
     class  UserViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime;
+        TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemClassEndTime;
         TextView day1, day2, day3, day4, day5, day6, day7;
         TextView teacherName, studentNameValue;
         Button signInButton;
@@ -203,6 +207,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             itemClassStartTime = (TextView) itemView.findViewById(R.id.itemClassTimesForStudent);
             itemClassLateTime = (TextView) itemView.findViewById(R.id.classLateTime);
             itemClassAbsentTime = (TextView) itemView.findViewById(R.id.classAbsentTime);
+            itemClassEndTime = (TextView) itemView.findViewById(R.id.classEndTime);
             day1 = (TextView) itemView.findViewById(R.id.day1);
             day2 = (TextView) itemView.findViewById(R.id.day2);
             day3 = (TextView) itemView.findViewById(R.id.day3);
@@ -329,7 +334,20 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                             .child("StudentRecord");
 
                     //Writing records to Firebase:
-                    
+                    teacherRecord.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
 
 
