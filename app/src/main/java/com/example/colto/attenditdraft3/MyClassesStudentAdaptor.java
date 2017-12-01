@@ -55,7 +55,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
         holder.itemClassAbsentTime.setText(myClass.classAbsentTime);
         holder.itemClassEndTime.setText(myClass.classEndTime);
         holder.teacherName.setText(myClass.teacherName);
-        holder.studentNameValue.setText(myClass.studentName);
+        holder.studentRealNameValue.setText(myClass.studentRealName);
+        holder.studentUserNameValue.setText(myClass.studentUserName);
         holder.day1.setText(myClass.day1);
         holder.day2.setText(myClass.day2);
         holder.day3.setText(myClass.day3);
@@ -160,7 +161,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
         TextView itemClassName, itemClassStartTime, itemClassLateTime, itemClassAbsentTime, itemClassEndTime;
         TextView day1, day2, day3, day4, day5, day6, day7;
-        TextView teacherName, studentNameValue;
+        TextView teacherName, studentRealNameValue, studentUserNameValue;
         Button signInButton;
 
 
@@ -180,7 +181,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
             day6 = (TextView) itemView.findViewById(R.id.day6);
             day7 = (TextView) itemView.findViewById(R.id.day7);
             teacherName = (TextView) itemView.findViewById(R.id.teacherName);
-            studentNameValue = (TextView) itemView.findViewById(R.id.studentNameValue);
+            studentRealNameValue = (TextView) itemView.findViewById(R.id.studentRealNameValue);
+            studentUserNameValue =(TextView) itemView.findViewById(R.id.studentUserNameValue);
 
             signInButton = (Button) itemView.findViewById(R.id.SignInButtonForStudents);
 
@@ -288,13 +290,13 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                     teacherRecord = database.getReference("TeacherClass")
                             .child(teacherName.getText().toString())
                             .child(itemClassName.getText().toString())
-                            .child("ClassRecord").child(studentNameValue.getText().toString());
+                            .child("ClassRecord").child(studentUserNameValue.getText().toString());
 
                     //studentRecord
                     studentRecord = database.getReference("TeacherClass")
                             .child(teacherName.getText().toString())
                             .child(itemClassName.getText().toString())
-                            .child("StudentsEnrolled").child(studentNameValue.getText().toString())
+                            .child("StudentsEnrolled").child(studentUserNameValue.getText().toString())
                             .child("StudentRecord");
 
                     //Writing records to Firebase:
@@ -376,7 +378,8 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                             }
 
 
-                            StudentRecordModel recordModel = new StudentRecordModel(currentDate,
+                            StudentRecordModel recordModel = new StudentRecordModel(itemClassName.getText().toString(),
+                                    currentDate,
                                     signInTime,
                                     isPresent,
                                     isLate,

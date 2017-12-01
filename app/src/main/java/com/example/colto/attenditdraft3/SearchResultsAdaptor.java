@@ -136,7 +136,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
 
                             }
                             else {
-                                studentEnrolledRef.child(studentsEnrolledModel.getStudentRealName()).setValue(studentsEnrolledModel);
+                                studentEnrolledRef.child(studentsEnrolledModel.getStudentUsername()).setValue(studentsEnrolledModel);
                                 MyClassesModel myClass = new MyClassesModel(itemClassName.getText().toString(),
                                         itemClassStartTime.getText().toString(),
                                         itemClassLateTime.getText().toString(),
@@ -144,6 +144,7 @@ public class SearchResultsAdaptor extends RecyclerView.Adapter<SearchResultsAdap
                                         itemClassEndTime.getText().toString(),
                                         itemTeacherName.getText().toString(),
                                         studentsRealNameValue,
+                                        studentsUserNameValue,
                                         day1.getText().toString(),
                                         day2.getText().toString(),
                                         day3.getText().toString(),

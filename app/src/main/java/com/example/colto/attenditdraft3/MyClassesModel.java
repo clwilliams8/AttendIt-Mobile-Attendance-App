@@ -9,21 +9,22 @@ import java.util.Map;
 
 public class MyClassesModel {
 
-    String className, classStartTime, classLateTime, classAbsentTime, classEndTime, teacherName, studentName, day1, day2, day3, day4, day5, day6, day7;
+    String className, classStartTime, classLateTime, classAbsentTime, classEndTime, teacherName, studentRealName, studentUserName, day1, day2, day3, day4, day5, day6, day7;
 
     public MyClassesModel(){
 
     }
 
 
-    public MyClassesModel(String className, String classStartTime, String classLateTime, String classAbsentTime, String classEndTime, String teacherName, String studentName, String day1, String day2, String day3, String day4, String day5, String day6, String day7) {
+    public MyClassesModel(String className, String classStartTime, String classLateTime, String classAbsentTime, String classEndTime, String teacherName, String studentRealName, String studentUserName, String day1, String day2, String day3, String day4, String day5, String day6, String day7) {
         this.className = className;
         this.classStartTime = classStartTime;
         this.classLateTime = classLateTime;
         this.classAbsentTime = classAbsentTime;
         this.classEndTime = classEndTime;
         this.teacherName = teacherName;
-        this.studentName = studentName;
+        this.studentRealName = studentRealName;
+        this.studentUserName = studentUserName;
         this.day1 = day1;
         this.day2 = day2;
         this.day3 = day3;
@@ -89,9 +90,13 @@ public class MyClassesModel {
 
     public void setTeacherName(String teacherName) {this.teacherName = teacherName;}
 
-    public String getStudentName() {return studentName;}
+    public String getStudentRealName() {return studentRealName;}
 
-    public void setStudentName(String studentName) {this.studentName = studentName;}
+    public void setStudentRealName(String studentName) {this.studentRealName = studentName;}
+
+    public String getStudentUserName() {return studentUserName;}
+
+    public void setStudentUserName(String studentUserName) {this.studentUserName = studentUserName;}
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -101,7 +106,8 @@ public class MyClassesModel {
         result.put("classAbsentTime", classAbsentTime);
         result.put("classEndTime", classEndTime);
         result.put("teacherName", teacherName);
-        result.put("studentName", studentName);
+        result.put("studentRealName", studentRealName);
+        result.put("studentUserName", studentUserName);
         result.put("day1", day1);
         result.put("day2", day2);
         result.put("day3", day3);

@@ -83,7 +83,7 @@
      android:layout_marginRight="8dp"
      android:layout_marginTop="8dp"
      android:ems="10"
-     android:hint="8:00AM"
+     android:hint="8:00 AM"
      android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/endDateInput" />
@@ -109,7 +109,7 @@
      android:layout_marginRight="8dp"
      android:layout_marginTop="8dp"
      android:ems="10"
-     android:hint="8:50AM"
+     android:hint="8:50 AM"
      android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/startTimeInput" />
@@ -135,7 +135,7 @@
      android:layout_marginRight="8dp"
      android:layout_marginTop="8dp"
      android:ems="10"
-     android:hint="8:15AM"
+     android:hint="8:15 AM"
      android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/endTimeInput" />
@@ -175,7 +175,7 @@
      android:layout_marginRight="8dp"
      android:layout_marginTop="8dp"
      android:ems="10"
-     android:hint="8:25AM"
+     android:hint="8:25 AM"
      android:inputType="textPersonName"
      app:layout_constraintRight_toRightOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/studentLateInput" />
@@ -332,7 +332,6 @@
      android:layout_marginStart="8dp"
      android:layout_marginTop="16dp"
      android:ems="10"
-     android:hint="Wednesday"
      android:inputType="textPersonName"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintHorizontal_bias="0.947"
@@ -347,7 +346,6 @@
      android:layout_marginStart="8dp"
      android:layout_marginTop="16dp"
      android:ems="10"
-     android:hint="day7"
      android:inputType="textPersonName"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintHorizontal_bias="0.947"
