@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class InstructorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -112,7 +111,7 @@ public class InstructorActivity extends AppCompatActivity
         } else if (id == R.id.myRecords) {
             Bundle bundle = new Bundle();
             bundle.putString("USER_NAME",teacherUserNameValue);
-            MyRecordsFragment fragment = new MyRecordsFragment();
+            MyRecordsTeacherFragment fragment = new MyRecordsTeacherFragment();
             fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();

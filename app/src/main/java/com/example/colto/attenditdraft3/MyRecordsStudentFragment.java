@@ -6,17 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyRecordsFragment extends Fragment {
+public class MyRecordsStudentFragment extends Fragment {
 
-    String userNameValue;
-
-    public MyRecordsFragment() {
+    String studentUserNameValue;
+    public MyRecordsStudentFragment() {
         // Required empty public constructor
     }
 
@@ -24,12 +22,17 @@ public class MyRecordsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_records, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_my_records_student2, container, false);
 
         Bundle bundle =getArguments();
         if(bundle != null) {
-            userNameValue = bundle.getString("USER_NAME");
+            studentUserNameValue = bundle.getString("USER_NAME");
         }
+
+
+
+
 
 
         return view;

@@ -1,20 +1,6 @@
 package com.example.colto.attenditdraft3;
 
-import android.app.KeyguardManager;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.hardware.fingerprint.FingerprintManager;
-import android.os.Build;
-import android.os.CancellationSignal;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.security.keystore.KeyGenParameterSpec;
-import android.security.keystore.KeyPermanentlyInvalidatedException;
-import android.security.keystore.KeyProperties;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -29,33 +15,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 
 /**
  * Created by colto on 11/19/2017.
@@ -338,7 +302,89 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            //Date formats:
+                            SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
+                            SimpleDateFormat sdf2 = new SimpleDateFormat("h:mm a");
 
+
+                            //Get current date from machine. And start and late time dates from class
+                            String currentDate = sdf1.format(new Date());
+                            String startTimeString = itemClassStartTime.getText().toString();
+                            String classLateString = itemClassLateTime.getText().toString();
+                            String classAbsentString = itemClassAbsentTime.getText().toString();
+                            String signInTime = sdf2.format(new Date());
+
+                            //Are they within the present time?
+                            Boolean isPresent = false;
+                            Boolean isLate = false;
+                            Boolean isAbsent = false;
+
+                            //Get all times needed.
+                            Date realTime = null;
+                            Date startTime = null;
+                            Date lateTime = null;
+                            Date absentTime = null;
+
+
+                            try {
+                                realTime = sdf2.parse(signInTime); //currentTime
+                                lateTime = sdf2.parse(classLateString);
+                                absentTime = sdf2.parse(classAbsentString);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+//                            try {
+//                                startTime = sdf2.parse(startTimeString); //class start time
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+
+//                            try {
+//                                lateTime = sdf2.parse(classLateString); //class late time
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            try {
+//                                absentTime = sdf2.parse(classAbsentString); //class absent time
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+
+
+
+                            //Logic for setting isPresent, isLate, and isAbsent for record.
+                            if(realTime.before(lateTime)){
+                                isPresent = true;
+                                isLate = false;
+                                isAbsent = false;
+                            }
+
+
+                            else if(realTime.before(absentTime) && realTime.after(lateTime)) {
+                                isPresent = true;
+                                isLate = true;
+                                isAbsent = false;
+                            }
+
+
+                            else {
+                                isPresent = false;
+                                isLate = false;
+                                isAbsent = true;
+                            }
+
+
+                            StudentRecordModel recordModel = new StudentRecordModel(currentDate,
+                                    signInTime,
+                                    isPresent,
+                                    isLate,
+                                    isAbsent);
+
+
+                            teacherRecord.child(recordModel.getDate()).setValue(recordModel);
+                            studentRecord.child(recordModel.getDate()).setValue(recordModel);
 
 
                         }
@@ -354,7 +400,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
 
 
-                    Toast.makeText(itemView.getContext(), "Made it thru ref", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "You have signed into Class. View your record for today.", Toast.LENGTH_SHORT).show();
 
 
 
