@@ -15,7 +15,7 @@
         android:id="@+id/text_no_records_teacher"
         android:visibility="invisible"
         android:gravity="center"
-        android:text="You have not joined any classes yet! Click the button in the top right corner to get started."
+        android:text="You have no records."
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="15dp"

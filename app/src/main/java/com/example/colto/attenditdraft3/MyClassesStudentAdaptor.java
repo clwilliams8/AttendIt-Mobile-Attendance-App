@@ -290,7 +290,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
                     teacherRecord = database.getReference("TeacherClass")
                             .child(teacherName.getText().toString())
                             .child(itemClassName.getText().toString())
-                            .child("ClassRecord").child(studentUserNameValue.getText().toString());
+                            .child("ClassRecord");
 
                     //studentRecord
                     studentRecord = database.getReference("TeacherClass")
@@ -379,6 +379,7 @@ public class MyClassesStudentAdaptor extends RecyclerView.Adapter<MyClassesStude
 
 
                             StudentRecordModel recordModel = new StudentRecordModel(itemClassName.getText().toString(),
+                                    studentRealNameValue.getText().toString(),
                                     currentDate,
                                     signInTime,
                                     isPresent,

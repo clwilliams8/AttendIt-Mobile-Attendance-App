@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class StudentRecordModel {
 
-    String className, date, signInTime;
+    String className, studentName, date, signInTime;
 
     Boolean present, late, absent;
 
@@ -17,8 +17,9 @@ public class StudentRecordModel {
     }
 
 
-    public StudentRecordModel(String className, String date, String signInTime, Boolean present, Boolean late, Boolean absent) {
+    public StudentRecordModel(String className, String studentName, String date, String signInTime, Boolean present, Boolean late, Boolean absent) {
         this.className = className;
+        this.studentName = studentName;
         this.date = date;
         this.signInTime = signInTime;
         this.present = present;
@@ -46,9 +47,18 @@ public class StudentRecordModel {
 
     public void setAbsent(Boolean absent) {this.absent = absent;}
 
+    public String getClassName() {return className;}
+
+    public void setClassName(String className) {this.className = className;}
+
+    public String getStudentName() {return studentName;}
+
+    public void setStudentName(String studentName) {this.studentName = studentName;}
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("className", className);
+        result.put("studentName", studentName);
         result.put("date", date);
         result.put("signInTime", signInTime);
         result.put("present", present);
