@@ -34,9 +34,24 @@ public class StudentRecordsAdaptor extends RecyclerView.Adapter<StudentRecordsAd
 
         holder.itemClassName.setText(myRecord.className);
         holder.itemRecordDate.setText(myRecord.date);
-        if(myRecord.present = true){holder.itemRecordDate.setText("Present");}
-        if(myRecord.late = true){holder.itemLateMark.setText("Late");}
-        if(myRecord.absent = true){holder.itemAbsentMark.setText("Absent");}
+
+        if(myRecord.present.booleanValue())
+            holder.itemPresentMark.setText("Present");
+        else
+            holder.itemPresentMark.setText("");
+
+
+        if(myRecord.late.booleanValue())
+            holder.itemLateMark.setText("Late");
+        else
+            holder.itemLateMark.setText("");
+
+
+        if(myRecord.absent.booleanValue())
+            holder.itemAbsentMark.setText("Absent");
+        else
+            holder.itemAbsentMark.setText("");
+
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override

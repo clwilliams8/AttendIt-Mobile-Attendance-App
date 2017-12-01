@@ -32,8 +32,8 @@ public class MyRecordsStudentFragment extends Fragment {
     String studentUserNameValue;
 
     private RecyclerView recyclerView;
-    private List<MyClassesModel> result;
-    private MyClassesTeacherAdaptor adaptor;
+    private List<StudentRecordModel> result;
+    private StudentRecordsAdaptor adaptor;
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -59,13 +59,14 @@ public class MyRecordsStudentFragment extends Fragment {
                 .child("DrMilanova")
                 .child("Capstone")
                 .child("StudentsEnrolled")
-                .child("Colton Williams");
+                .child(studentUserNameValue)
+                .child("StudentRecord");
 
-        emptyText = (TextView) view.findViewById(R.id.text_no_data);
+        emptyText = (TextView) view.findViewById(R.id.text_no_data_student_record);
 
         result = new ArrayList<>();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.teacherClassList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.studentClassList_records);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -75,7 +76,7 @@ public class MyRecordsStudentFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.addItemDecoration(itemDecoration);
 
-        adaptor = new MyClassesTeacherAdaptor(result);
+        adaptor = new StudentRecordsAdaptor(result);
         recyclerView.setAdapter(adaptor);
 
         updateList(); //IF THIS WORKS REMOVE CREATE RESULT ENTIRELY
@@ -108,7 +109,7 @@ public class MyRecordsStudentFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                result.add(dataSnapshot.getValue(MyClassesModel.class));
+                result.add(dataSnapshot.getValue(StudentRecordModel.class));
                 adaptor.notifyDataSetChanged();
                 checkIfEmpty();
             }
@@ -116,7 +117,7 @@ public class MyRecordsStudentFragment extends Fragment {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                MyClassesModel model = dataSnapshot.getValue(MyClassesModel.class);
+                StudentRecordModel model = dataSnapshot.getValue(StudentRecordModel.class);
 
                 int index = getItemIndex(model);
 
@@ -127,7 +128,7 @@ public class MyRecordsStudentFragment extends Fragment {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                MyClassesModel model = dataSnapshot.getValue(MyClassesModel.class);
+                StudentRecordModel model = dataSnapshot.getValue(StudentRecordModel.class);
 
                 int index = getItemIndex(model);
 
@@ -148,7 +149,7 @@ public class MyRecordsStudentFragment extends Fragment {
         });
     }
 
-    private int getItemIndex(MyClassesModel myClass) {
+    private int getItemIndex(StudentRecordModel myClass) {
 
         int index =  -1;
 
@@ -165,7 +166,7 @@ public class MyRecordsStudentFragment extends Fragment {
     }
 
     private void changeUser(int position) {
-        MyClassesModel myClass = result.get(position);
+        StudentRecordModel myClass = result.get(position);
         //in video he changes age to 100
 
         Map<String, Object> userValues = myClass.toMap();
